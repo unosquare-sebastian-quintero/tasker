@@ -1,7 +1,9 @@
-import { BrowserWindow, Tray, app, nativeImage } from "electron";
+import { app, BrowserWindow, nativeImage, Tray } from "electron";
+import TrayIcon from "./assets/vite.svg";
 
 function createRichContextualMenu(x: number, y: number) {
-  const width = 640;
+  const width = 360;
+  const height = 240;
   var window = new BrowserWindow({
     alwaysOnTop: true,
     focusable: true,
@@ -11,6 +13,7 @@ function createRichContextualMenu(x: number, y: number) {
     x: x - width / 2,
     y,
     width,
+    height,
   });
 
   window.addListener("blur", () => window.close());
@@ -23,9 +26,7 @@ function createRichContextualMenu(x: number, y: number) {
 }
 
 app.whenReady().then(function ready() {
-  const icon = nativeImage.createFromPath("assets/vite.svg");
-
-  var tray = new Tray(icon);
+  var tray = new Tray(nativeImage.createFromDataURL(TrayIcon));
 
   tray.setToolTip("Create task and track time");
   tray.setTitle("Timesheet");

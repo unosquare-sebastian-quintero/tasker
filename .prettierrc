@@ -1,0 +1,4 @@
+{
+  "plugins": ["@ianvs/prettier-plugin-sort-imports"],
+  "importOrderSortSpecifiers": true
+}

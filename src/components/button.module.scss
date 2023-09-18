@@ -1,0 +1,10 @@
+.button {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background-color: transparent;
+  border: none;
+  box-sizing: border-box;
+  &.button--dense {
+    padding: 0.5rem 1rem;
+  }
+}
