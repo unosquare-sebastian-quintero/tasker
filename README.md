@@ -1,10 +1,10 @@
-# Timesheet Time-track
+# Tasker
 
 ## Tech Stack
 
 * React
-* SASS
 * Electron
+* SASS
 
 ## Features
 
