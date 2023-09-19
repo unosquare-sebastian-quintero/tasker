@@ -1,22 +1,26 @@
 import clsx from "clsx";
 import classes from "./typography.module.scss";
 
+type Variant = "h1" | "default";
+
+const COMPONENT_VARIANT_MAP: Record<Variant, React.ElementType> = {
+  h1: "h1",
+  default: "span",
+};
+
 export type TypographyProps = React.HTMLAttributes<typeof HTMLElement> & {
   component?: React.ElementType;
-  variant?: "h1";
+  variant?: Variant;
 };
 
 export function Typography({
-  component = "span",
+  component,
   variant,
   className,
   ...props
 }: TypographyProps) {
-  if (variant === "h1") {
-    component = "h1";
-  }
-
-  const Component = component;
+  const Component =
+    component != null ? component : COMPONENT_VARIANT_MAP[variant ?? "default"];
 
   return (
     <Component

@@ -1,4 +1,25 @@
+@import "../styles/theme";
+
 .header {
   width: 100%;
   text-align: center;
+  border-bottom: $border;
+  position: relative;
+  &__pin {
+    position: absolute;
+    right: 0.25rem;
+    top: 50%;
+    padding: 0.25rem;
+    transform: translateY(-50%);
+    border: none;
+    background-color: transparent;
+    border-radius: 50%;
+    &:hover {
+      background-color: darken($color: $primary, $amount: 6%);
+    }
+  }
+  &__img {
+    width: 1rem;
+    height: 1rem;
+  }
 }

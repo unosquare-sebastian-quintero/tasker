@@ -21,6 +21,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "electron"],
+  "include": ["src", "electron", "api-env.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

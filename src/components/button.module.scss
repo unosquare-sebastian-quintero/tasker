@@ -1,10 +1,30 @@
+@import "../styles/theme";
+
 .button {
   width: 100%;
   padding: 1rem 1.5rem;
-  background-color: transparent;
   border: none;
   box-sizing: border-box;
+  &.button--default {
+    background-color: $secondary;
+    color: $primary;
+    &:hover {
+      background-color: lighten($color: $secondary, $amount: 6%);
+    }
+    &:active {
+      background-color: lighten($color: $secondary, $amount: 12%);
+    }
+  }
   &.button--dense {
     padding: 0.5rem 1rem;
+    background-color: $primary;
+    color: $secondary;
+    border-top: $border;
+    &:hover {
+      background-color: darken($color: $primary, $amount: 6%);
+    }
+    &:active {
+      background-color: darken($color: $primary, $amount: 3%);
+    }
   }
 }

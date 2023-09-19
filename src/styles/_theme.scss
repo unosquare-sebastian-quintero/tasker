@@ -1,0 +1,8 @@
+$primary: #fff;
+$secondary: #000;
+
+$border: 1px solid
+  darken(
+    $color: $primary,
+    $amount: 6%,
+  );
