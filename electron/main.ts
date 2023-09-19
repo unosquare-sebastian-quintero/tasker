@@ -1,7 +1,13 @@
-import { app, BrowserWindow, nativeImage, Tray } from "electron";
+import { join } from "path";
+import { app, BrowserWindow, ipcMain, nativeImage, Tray } from "electron";
+import ElectronPositioner from "electron-positioner";
 import TrayIcon from "./assets/vite.svg";
+import { EVENT_TOGGLE_PIN_WINDOW } from "./commands";
 
-function createRichContextualMenu(x: number, y: number) {
+// TODO: zustand
+var canOpenWindow = true;
+
+function createRichContextualMenu(trayBounds: Electron.Rectangle) {
   const width = 360;
   const height = 240;
   var window = new BrowserWindow({
@@ -10,19 +16,40 @@ function createRichContextualMenu(x: number, y: number) {
     movable: false,
     resizable: false,
     frame: false,
-    x: x - width / 2,
-    y,
+    // x: x - width / 2,
+    // y,
     width,
     height,
+    webPreferences: {
+      preload: join(__dirname, "preload.js"),
+    },
   });
 
-  window.addListener("blur", () => window.close());
+  var positioner = new ElectronPositioner(window);
+  positioner.move("trayCenter", trayBounds);
+
+  var isPinned = false;
+  ipcMain.on(EVENT_TOGGLE_PIN_WINDOW, (event) => {
+    console.log("toggle pin window");
+    isPinned = !isPinned;
+  });
+
+  window.addListener("blur", () => {
+    if (isPinned) {
+      return;
+    }
+
+    window.close();
+    canOpenWindow = true;
+  });
 
   if (process.env["VITE_DEV_SERVER_URL"]) {
     window.loadURL(process.env["VITE_DEV_SERVER_URL"]);
   } else {
     window.loadFile("dist/index.html");
   }
+
+  canOpenWindow = false;
 }
 
 app.whenReady().then(function ready() {
@@ -32,8 +59,12 @@ app.whenReady().then(function ready() {
   tray.setTitle("Timesheet");
 
   tray.addListener("click", () => {
-    const { x, y, width, height } = tray.getBounds();
-    createRichContextualMenu(x + width / 2, y + height);
+    if (!canOpenWindow) {
+      return;
+    }
+
+    // const { x, y, width, height } = tray.getBounds();
+    createRichContextualMenu(tray.getBounds());
   });
 });
 
