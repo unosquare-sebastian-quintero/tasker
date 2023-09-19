@@ -1,8 +1,27 @@
 $primary: #fff;
 $secondary: #000;
 
-$border: 1px solid
-  darken(
-    $color: $primary,
-    $amount: 6%,
-  );
+$primary-shade-1: darken(
+  $color: $primary,
+  $amount: 3%,
+);
+$primary-shade-2: darken(
+  $color: $primary,
+  $amount: 6%,
+);
+
+$secondary-shade-1: lighten(
+  $color: $secondary,
+  $amount: 12%,
+);
+$secondary-shade-2: lighten(
+  $color: $secondary,
+  $amount: 6%,
+);
+
+$border: 1px solid $primary-shade-2;
+$border-radius: 0.25rem;
+
+%glassmorphism {
+  backdrop-filter: blur(4px);
+}

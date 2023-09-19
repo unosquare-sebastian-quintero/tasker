@@ -1,14 +1,52 @@
+@import "../../styles/theme";
+
 .task-list {
   list-style-type: none;
   padding: 0;
   margin: 0;
   &__item {
-    padding: 0.75rem 1rem;
+    // padding: 0 1rem;
     display: flex;
     justify-content: space-between;
+    background-color: $primary;
+    &:hover {
+      background-color: $primary-shade-2;
+    }
+  }
+  &__button {
+    background-color: transparent;
+    border: none;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    position: relative;
+    &:hover {
+      .task-list__button-content {
+        opacity: 1;
+      }
+    }
+  }
+  &__button-content {
+    position: absolute;
+    inset: 0;
+    background-color: rgba($primary-shade-2, 0.1);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: opacity ease-in 150ms;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__button-text {
+    padding: 0.25rem 0.5rem;
+    background-color: $primary;
+    border-radius: $border-radius;
   }
   &__time {
     width: 3rem;
     text-align: right;
+    padding: 0.75rem 1rem;
   }
 }

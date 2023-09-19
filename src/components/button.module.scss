@@ -9,10 +9,10 @@
     background-color: $secondary;
     color: $primary;
     &:hover {
-      background-color: lighten($color: $secondary, $amount: 6%);
+      background-color: $secondary-shade-2;
     }
     &:active {
-      background-color: lighten($color: $secondary, $amount: 12%);
+      background-color: $secondary-shade-1;
     }
   }
   &.button--dense {
@@ -21,10 +21,10 @@
     color: $secondary;
     border-top: $border;
     &:hover {
-      background-color: darken($color: $primary, $amount: 6%);
+      background-color: $primary-shade-2;
     }
     &:active {
-      background-color: darken($color: $primary, $amount: 3%);
+      background-color: $primary-shade-1;
     }
   }
 }

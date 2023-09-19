@@ -15,7 +15,7 @@
     background-color: transparent;
     border-radius: 50%;
     &:hover {
-      background-color: darken($color: $primary, $amount: 6%);
+      background-color: $primary-shade-2;
     }
   }
   &__img {

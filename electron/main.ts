@@ -16,6 +16,7 @@ function createRichContextualMenu(trayBounds: Electron.Rectangle) {
     movable: false,
     resizable: false,
     frame: false,
+    // transparent: true,
     // x: x - width / 2,
     // y,
     width,
