@@ -6,6 +6,11 @@ import { Typography } from "./typography";
 
 export function Header() {
   const [isPinned, setIsPinned] = useState(false);
+
+  function handleChangeIconClick() {
+    window.electron.changeIcon();
+  }
+
   function handleButtonClick() {
     window.electron.togglePinWindow();
     setIsPinned((pinned) => !pinned);
@@ -13,6 +18,7 @@ export function Header() {
 
   return (
     <header className={classes.header}>
+      <button onClick={handleChangeIconClick}>icon</button>
       <Typography variant="h1">Date</Typography>
       <button className={classes.header__pin} onClick={handleButtonClick}>
         <img

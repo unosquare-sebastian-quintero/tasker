@@ -9,6 +9,9 @@ export default defineConfig({
     electron([
       {
         entry: "electron/main.ts",
+        vite: {
+          publicDir: 'resources'
+        }
       },
       {
         entry: "electron/preload.ts",
