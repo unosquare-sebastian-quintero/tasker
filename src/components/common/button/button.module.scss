@@ -4,6 +4,9 @@
   width: 100%;
   padding: 0.5rem 0.75rem;
   border-radius: $border-radius;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
   &.button--primary {
     background-color: $primary;
     color: $secondary;

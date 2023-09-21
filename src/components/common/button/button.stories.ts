@@ -1,4 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
+import { IconAlarmFilled, IconBellFilled } from "@tabler/icons-react";
 import { Button } from "./button";
 
 const meta = {
@@ -25,5 +26,21 @@ export const Secondary: Story = {
   args: {
     children: "Secondary",
     variant: "secondary",
+  },
+};
+
+export const PrimaryWithLeftIcon: Story = {
+  args: {
+    children: "Primary",
+    variant: "primary",
+    leftIcon: IconAlarmFilled,
+  },
+};
+
+export const SecondaryWithRightIcon: Story = {
+  args: {
+    children: "Secondary",
+    variant: "secondary",
+    rightIcon: IconBellFilled,
   },
 };
