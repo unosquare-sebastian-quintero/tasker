@@ -1,0 +1,18 @@
+@import "../../../styles/theme";
+
+.toggle-button {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 0.125rem;
+  border-radius: $border-radius;
+
+  background-color: $secondary;
+  color: $primary;
+  border: $border-secondary;
+  &.toggle-button--pressed {
+    background-color: $primary;
+    color: $secondary;
+    border: $border-primary;
+  }
+}
