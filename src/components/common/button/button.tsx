@@ -1,6 +1,6 @@
 import { Icon } from "@tabler/icons-react";
 import clsx from "clsx";
-import { BaseButton } from "../base-button/base-button";
+import { BaseButton, BaseButtonProps } from "../base-button/base-button";
 import classes from "./button.module.scss";
 
 function renderIcon(IconComponent?: Icon | null) {
@@ -11,7 +11,7 @@ function renderIcon(IconComponent?: Icon | null) {
   return <IconComponent size={16} />;
 }
 
-export type ButtonProps = React.ComponentProps<typeof BaseButton> & {
+export type ButtonProps = BaseButtonProps & {
   variant: "primary" | "secondary";
   leftIcon?: Icon;
   rightIcon?: Icon;

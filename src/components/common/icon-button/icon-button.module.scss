@@ -1,0 +1,14 @@
+@import "../../../styles/theme";
+
+.icon-button {
+  padding: 0.25rem;
+  background-color: $secondary;
+  border: $border-secondary;
+  border-radius: 50%;
+  &:hover {
+    background-color: $secondary-shade-2;
+  }
+  &:active {
+    background-color: $secondary-shade-1;
+  }
+}
