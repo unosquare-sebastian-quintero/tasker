@@ -19,8 +19,10 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    "types": ["vitest/globals"]
   },
-  "include": ["src", "electron", "api-env.d.ts"],
+  "include": ["src", "electron", "vitest.setup.ts", "api-env.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
