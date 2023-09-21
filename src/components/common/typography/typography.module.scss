@@ -1,5 +1,6 @@
 .typography {
   margin: 0;
+  padding: 0;
   &.typography--h1 {
     font-size: 1.5rem;
     line-height: 2rem;
@@ -9,5 +10,11 @@
     font-size: 1rem;
     line-height: 1.25rem;
     font-weight: 500;
+  }
+  &.typography--button {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
   }
 }

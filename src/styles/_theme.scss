@@ -1,25 +1,26 @@
-$primary: #fff;
-$secondary: #000;
-
-$primary-shade-1: darken(
+$primary: #000;
+$primary-shade-1: lighten(
   $color: $primary,
-  $amount: 3%,
-);
-$primary-shade-2: darken(
-  $color: $primary,
-  $amount: 6%,
-);
-
-$secondary-shade-1: lighten(
-  $color: $secondary,
   $amount: 12%,
 );
-$secondary-shade-2: lighten(
+$primary-shade-2: lighten(
+  $color: $primary,
+  $amount: 6%,
+);
+
+$secondary: #fff;
+$secondary-shade-1: darken(
+  $color: $secondary,
+  $amount: 3%,
+);
+$secondary-shade-2: darken(
   $color: $secondary,
   $amount: 6%,
 );
 
-$border: 1px solid $primary-shade-2;
+$border-primary: 1px solid $primary-shade-2;
+$border-secondary: 1px solid $secondary-shade-2;
+
 $border-radius: 0.25rem;
 
 %glassmorphism {

@@ -1,0 +1,29 @@
+@import "../../../styles/theme";
+
+.button {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border-radius: $border-radius;
+  &.button--primary {
+    background-color: $primary;
+    color: $secondary;
+    border: $border-primary;
+    &:hover {
+      background-color: $primary-shade-2;
+    }
+    &:active {
+      background-color: $primary-shade-1;
+    }
+  }
+  &.button--secondary {
+    background-color: $secondary;
+    color: $primary;
+    border: $border-secondary;
+    &:hover {
+      background-color: $secondary-shade-2;
+    }
+    &:active {
+      background-color: $secondary-shade-1;
+    }
+  }
+}
