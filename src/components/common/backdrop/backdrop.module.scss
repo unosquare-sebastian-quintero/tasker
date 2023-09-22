@@ -1,0 +1,10 @@
+@import "../../../styles/theme";
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @extend %glassmorphism;
+}
