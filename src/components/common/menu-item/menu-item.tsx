@@ -1,9 +1,6 @@
 import clsx from "clsx";
-import { useEffect, useState } from "react";
-import {
-  useMenuContext,
-  useMenuContextItem,
-} from "../../../contexts/menu-context/menu-context";
+import { useEffect, useRef } from "react";
+import { useMenuItem } from "../../../contexts/menu-context";
 import styles from "./menu-item.module.scss";
 
 type Variant = "default" | "radio" | "checkbox";
@@ -16,7 +13,7 @@ const ROLE_VARIANT_MAP: Record<Variant, Role> = {
   checkbox: "menuitemcheckbox",
 };
 
-function getInitialAriaProps(variant: Variant, disabled?: boolean) {
+function getAriaProps(variant: Variant, checked: boolean, disabled?: boolean) {
   const role = ROLE_VARIANT_MAP[variant];
   const ariaProps: React.AriaAttributes = {};
 
@@ -25,7 +22,7 @@ function getInitialAriaProps(variant: Variant, disabled?: boolean) {
   }
 
   if (role === "menuitemcheckbox" || role === "menuitemradio") {
-    ariaProps["aria-checked"] = false;
+    ariaProps["aria-checked"] = checked;
   }
 
   return ariaProps;
@@ -33,6 +30,7 @@ function getInitialAriaProps(variant: Variant, disabled?: boolean) {
 
 export type MenuItemProps = React.HTMLAttributes<HTMLLIElement> & {
   variant: Variant;
+  value: string;
   disabled?: boolean;
   onCheckChange?: (
     checked: boolean,
@@ -42,6 +40,7 @@ export type MenuItemProps = React.HTMLAttributes<HTMLLIElement> & {
 
 export function MenuItem({
   variant,
+  value,
   disabled,
   onCheckChange,
   className,
@@ -52,43 +51,38 @@ export function MenuItem({
   const role = ROLE_VARIANT_MAP[variant];
 
   const {
+    isFocused,
+    isChecked,
     closeMenu,
+    toggleItemChecked,
     checkRadioItem,
     selectItem,
     focusNextItem,
     focusPreviousItem,
-  } = useMenuContext();
-  const { itemId } = useMenuContextItem(role);
+  } = useMenuItem(role, value);
 
-  const [ariaProps, setAriaProps] = useState<React.AriaAttributes>(
-    getInitialAriaProps(variant, disabled),
-  );
+  const liRef = useRef<HTMLLIElement>(null);
+  const ariaProps = getAriaProps(variant, isChecked, disabled);
 
   useEffect(() => {
-    setAriaProps((prevAriaProps) => ({
-      ...prevAriaProps,
-      "aria-disabled": disabled,
-    }));
-  }, [disabled]);
+    if (isFocused) {
+      liRef.current?.focus();
+    }
+  }, [isFocused]);
 
   function toggleChecked(
     event: React.MouseEvent<HTMLLIElement> | React.KeyboardEvent<HTMLLIElement>,
   ) {
     if (role === "menuitemcheckbox" || role === "menuitemradio") {
-      setAriaProps((prevAriaProps) => {
-        const nextChecked = !prevAriaProps["aria-checked"];
-        onCheckChange?.(nextChecked, event);
-        return {
-          ...prevAriaProps,
-          "aria-checked": nextChecked,
-        };
-      });
+      toggleItemChecked();
+      onCheckChange?.(!isChecked, event);
     }
   }
 
   function handleItemClick(event: React.MouseEvent<HTMLLIElement>) {
     onClick?.(event);
     toggleChecked(event);
+    selectItem();
   }
 
   function handleItemKeyUp(event: React.KeyboardEvent<HTMLLIElement>) {
@@ -100,16 +94,16 @@ export function MenuItem({
         break;
 
       case "Enter":
-        selectItem(itemId);
+        selectItem();
         break;
 
       case " ":
         if (role === "menuitemcheckbox") {
           toggleChecked(event);
         } else if (role === "menuitemradio") {
-          checkRadioItem(itemId);
+          checkRadioItem();
         } else {
-          selectItem(itemId);
+          selectItem();
           closeMenu();
         }
         break;
@@ -135,6 +129,7 @@ export function MenuItem({
     <li
       {...props}
       {...ariaProps}
+      ref={liRef}
       role={role}
       tabIndex={0}
       className={clsx(className, styles["menu-item"])}

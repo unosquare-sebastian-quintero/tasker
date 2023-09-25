@@ -5,6 +5,10 @@ import { Menu } from "./menu";
 const meta = {
   title: "Menu",
   component: Menu,
+  argTypes: {
+    onOptionSelected: {},
+    onClose: {},
+  },
   parameters: {
     layout: "centered",
   },
@@ -19,8 +23,12 @@ export const Default: Story = {
   args: {
     children: (
       <>
-        <MenuItem variant="default">Option 1</MenuItem>
-        <MenuItem variant="default">Option 2</MenuItem>
+        <MenuItem variant="default" value="option-1">
+          Option 1
+        </MenuItem>
+        <MenuItem variant="default" value="option-2">
+          Option 2
+        </MenuItem>
       </>
     ),
   },
