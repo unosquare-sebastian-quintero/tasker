@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { IconLock, IconPin } from "@tabler/icons-react";
+import { IconLock, IconPin, IconX } from "@tabler/icons-react";
 import { IconButton } from "./icon-button";
 
 const meta = {
@@ -17,12 +17,21 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
+    variant: "bordered",
     children: <IconPin />,
   },
 };
 
 export const Small: Story = {
   args: {
+    variant: "bordered",
     children: <IconLock size={16} />,
+  },
+};
+
+export const Borderless: Story = {
+  args: {
+    variant: "borderless",
+    children: <IconX />,
   },
 };

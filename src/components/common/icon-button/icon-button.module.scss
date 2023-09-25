@@ -3,8 +3,13 @@
 .icon-button {
   padding: 0.25rem;
   background-color: $secondary;
-  border: $border-secondary;
   border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &.icon-button--bordered {
+    border: $border-secondary;
+  }
   &:hover {
     background-color: $secondary-shade-2;
   }

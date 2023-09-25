@@ -1,0 +1,26 @@
+@import "../../../styles/theme";
+
+.dialog {
+  background-color: $secondary;
+  border: $border-secondary;
+  border-radius: $border-radius;
+  &__header {
+    border-bottom: $border-secondary;
+    display: flex;
+    align-items: start;
+  }
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.25rem 0.75rem;
+  }
+  &__close {
+    padding: 0.25rem;
+  }
+  &__button {
+    color: $secondary-shade-4;
+    &:hover {
+      color: $primary;
+    }
+  }
+}

@@ -4,6 +4,7 @@ import { BaseButton, BaseButtonProps } from "../base-button/base-button";
 import styles from "./icon-button.module.scss";
 
 export type IconButtonProps = Omit<BaseButtonProps, "children"> & {
+  variant: "bordered" | "borderless";
   children: React.ReactElement<TablerIconsProps, Icon>;
 };
 

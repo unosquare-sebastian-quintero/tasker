@@ -17,11 +17,24 @@ $secondary-shade-2: darken(
   $color: $secondary,
   $amount: 6%,
 );
+$secondary-shade-3: darken(
+  $color: $secondary,
+  $amount: 12%,
+);
+$secondary-shade-4: darken(
+  $color: $secondary,
+  $amount: 24%,
+);
 
 $border-primary: 1px solid $primary-shade-2;
 $border-secondary: 1px solid $secondary-shade-2;
 
 $border-radius: 0.25rem;
+
+$space-1: 0.25rem;
+$space-2: 0.5rem;
+$space-3: 0.75rem;
+$space-4: 1rem;
 
 %glassmorphism {
   backdrop-filter: blur(4px);
