@@ -1,0 +1,17 @@
+@import "../../../styles/theme";
+
+.menu-item {
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  cursor: default;
+  box-sizing: border-box;
+  & ~ & {
+    border-top: $border-secondary;
+  }
+  &:hover {
+    background-color: $secondary-shade-2;
+  }
+  &:active {
+    background-color: $secondary-shade-1;
+  }
+}
