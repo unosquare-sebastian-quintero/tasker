@@ -8,9 +8,20 @@ import styles from "./dialog.module.scss";
 export type DialogProps = React.HTMLAttributes<HTMLDivElement> &
   React.PropsWithChildren & {
     title: string;
+    onClose?: () => void;
   };
 
-export function Dialog({ title, children, className, ...props }: DialogProps) {
+export function Dialog({
+  title,
+  onClose,
+  children,
+  className,
+  ...props
+}: DialogProps) {
+  function handleIconButtonClick() {
+    onClose?.();
+  }
+
   return (
     <Backdrop>
       <div
@@ -28,6 +39,7 @@ export function Dialog({ title, children, className, ...props }: DialogProps) {
             <IconButton
               variant="borderless"
               className={clsx(styles.dialog__button)}
+              onClick={handleIconButtonClick}
             >
               <IconX size={16} />
             </IconButton>
