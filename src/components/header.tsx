@@ -2,7 +2,7 @@ import { IconPin, IconPinned } from "@tabler/icons-react";
 import { useState } from "react";
 import { IconButton } from "./common/icon-button/icon-button";
 import { Typography } from "./common/typography/typography";
-import classes from "./header.module.scss";
+import styles from "./header.module.scss";
 
 export function Header() {
   const [isPinned, setIsPinned] = useState(false);
@@ -13,9 +13,9 @@ export function Header() {
   }
 
   return (
-    <header className={classes.header}>
+    <header className={styles.header}>
       <Typography variant="h1">Tasker</Typography>
-      <div className={classes.header__action}>
+      <div className={styles.header__action}>
         <IconButton variant="bordered" onClick={handleButtonClick}>
           {isPinned ? <IconPinned size={16} /> : <IconPin size={16} />}
         </IconButton>

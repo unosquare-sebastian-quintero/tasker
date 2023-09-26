@@ -1,5 +1,19 @@
 @import "../../styles/theme";
 
+.tasks {
+  display: contents;
+  &__actions {
+    padding: 0.25rem;
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    @extend %glassmorphism;
+  }
+}
+
 .task-list {
   list-style-type: none;
   padding: 0;
@@ -8,9 +22,9 @@
     // padding: 0 1rem;
     display: flex;
     justify-content: space-between;
-    background-color: $primary;
+    background-color: $secondary;
     &:hover {
-      background-color: $primary-shade-2;
+      background-color: $secondary-shade-2;
     }
   }
   &__button {
@@ -31,7 +45,7 @@
   &__button-content {
     position: absolute;
     inset: 0;
-    background-color: rgba($primary-shade-2, 0.1);
+    background-color: rgba($secondary-shade-2, 0.1);
     backdrop-filter: blur(4px);
     opacity: 0;
     transition: opacity ease-in 150ms;
@@ -41,7 +55,7 @@
   }
   &__button-text {
     padding: 0.25rem 0.5rem;
-    background-color: $primary;
+    background-color: $secondary;
     border-radius: $border-radius;
   }
   &__time {

@@ -2,4 +2,7 @@
   border: none;
   background-color: transparent;
   box-sizing: border-box;
+  &.base-button--full-width {
+    width: 100%;
+  }
 }

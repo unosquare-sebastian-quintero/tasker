@@ -3,11 +3,23 @@ import { Children } from "react";
 import { Typography } from "../typography/typography";
 import styles from "./base-button.module.scss";
 
-export type BaseButtonProps = React.HTMLAttributes<HTMLButtonElement>;
+export type BaseButtonProps = React.HTMLAttributes<HTMLButtonElement> & {
+  fullWidth?: boolean;
+};
 
-export function BaseButton({ className, children, ...props }: BaseButtonProps) {
+export function BaseButton({
+  fullWidth,
+  className,
+  children,
+  ...props
+}: BaseButtonProps) {
   return (
-    <button {...props} className={clsx(className, styles["base-button"])}>
+    <button
+      {...props}
+      className={clsx(className, styles["base-button"], {
+        [styles["base-button--full-width"]]: !!fullWidth,
+      })}
+    >
       {Children.map(children, (child) => {
         if (typeof child !== "string") {
           return child;

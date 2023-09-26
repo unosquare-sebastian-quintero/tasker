@@ -1,7 +1,8 @@
 .main {
+  flex-grow: 1;
+  position: relative;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  flex-grow: 1;
-  padding-bottom: 2rem;
 }

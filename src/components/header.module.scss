@@ -5,6 +5,7 @@
   position: relative;
   display: flex;
   justify-content: center;
+  border-bottom: $border-secondary;
   &__action {
     position: absolute;
     right: 0;

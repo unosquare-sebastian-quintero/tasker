@@ -1,5 +1,5 @@
 import { BaseButton } from "./common/base-button/base-button";
-import classes from "./footer.module.scss";
+import styles from "./footer.module.scss";
 
 export function Footer() {
   function handleButtonClick() {
@@ -7,9 +7,10 @@ export function Footer() {
   }
 
   return (
-    <footer className={classes.footer}>
+    <footer className={styles.footer}>
       <BaseButton
-        className={classes.footer__button}
+        className={styles.footer__button}
+        fullWidth
         onClick={handleButtonClick}
       >
         Close
