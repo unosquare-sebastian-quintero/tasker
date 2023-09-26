@@ -2,7 +2,7 @@ import { useState } from "react";
 import PinIcon from "../assets/pin-icon.svg";
 import PinnedIcon from "../assets/pinned-icon.svg";
 import classes from "./header.module.scss";
-import { Typography } from "./typography";
+import { Typography } from "./common/typography/typography";
 
 export function Header() {
   const [isPinned, setIsPinned] = useState(false);

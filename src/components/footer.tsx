@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "./button";
+import { BaseButton } from "./common/base-button/base-button";
 import classes from "./footer.module.scss";
 
 export function Footer() {
@@ -11,9 +11,9 @@ export function Footer() {
 
   return (
     <footer className={classes.footer}>
-      <Button variant="dense" onClick={handleButtonClick}>
+      <BaseButton onClick={handleButtonClick}>
         {hasStarted ? "Done" : "Start"}
-      </Button>
+      </BaseButton>
     </footer>
   );
 }

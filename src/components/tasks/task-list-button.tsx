@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { Typography } from "../typography";
+import { Typography } from "../common/typography/typography";
 import classes from "./tasks.module.scss";
 
 export type TaskListButtonProps = React.HTMLAttributes<HTMLButtonElement>;
