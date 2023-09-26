@@ -7,7 +7,20 @@ import { TaskSlice } from "./slice";
 export const createTaskSlice: StateCreator<State, [], [], TaskSlice> = (
   set,
 ) => ({
-  tasks: {},
+  tasks: {
+    test: {
+      type: "stopwatch",
+      label: "Test",
+      state: "idle",
+      actions: [],
+    },
+    hello: {
+      type: "stopwatch",
+      label: "Test",
+      state: "idle",
+      actions: [],
+    },
+  },
   addTask(task) {
     const uuid = v4();
     set((state) =>

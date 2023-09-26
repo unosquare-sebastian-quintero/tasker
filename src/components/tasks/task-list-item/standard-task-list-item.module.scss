@@ -1,0 +1,19 @@
+@import "../../../styles/theme";
+
+.task-list-item {
+  padding: 0.5rem 1rem;
+  display: flex;
+  //   justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: $secondary;
+  & ~ & {
+    border-top: $border-secondary;
+  }
+  &:last-child {
+    border-bottom: $border-secondary;
+  }
+  &__label {
+    flex-grow: 1;
+  }
+}

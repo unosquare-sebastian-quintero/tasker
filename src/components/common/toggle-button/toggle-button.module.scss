@@ -6,13 +6,24 @@
   text-align: center;
   padding: 0.125rem;
   border-radius: $border-radius;
-
   background-color: $secondary;
   color: $primary;
   border: $border-secondary;
+  &:hover {
+    background-color: $secondary-shade-2;
+  }
+  &:active {
+    background-color: $secondary-shade-1;
+  }
   &.toggle-button--pressed {
     background-color: $primary;
     color: $secondary;
     border: $border-primary;
+    &:hover {
+      background-color: $primary-shade-2;
+    }
+    &:active {
+      background-color: $primary-shade-1;
+    }
   }
 }
