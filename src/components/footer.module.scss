@@ -1,6 +1,14 @@
+@import "../styles/theme";
+
 .footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  border-top: $border-secondary;
+  &__button {
+    width: 100%;
+    &:hover {
+      background-color: $secondary-shade-2;
+    }
+    &:active {
+      background-color: $secondary-shade-1;
+    }
+  }
 }

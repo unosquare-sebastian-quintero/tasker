@@ -8,11 +8,13 @@ export type IconButtonProps = Omit<BaseButtonProps, "children"> & {
   children: React.ReactElement<TablerIconsProps, Icon>;
 };
 
-export function IconButton({ className, ...props }: IconButtonProps) {
+export function IconButton({ variant, className, ...props }: IconButtonProps) {
   return (
     <BaseButton
       {...props}
-      className={clsx(className, styles["icon-button"])}
+      className={clsx(className, styles["icon-button"], {
+        [styles["icon-button--bordered"]]: variant === "bordered",
+      })}
     ></BaseButton>
   );
 }
