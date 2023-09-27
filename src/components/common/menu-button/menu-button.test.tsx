@@ -7,7 +7,7 @@ import { Menu } from "../menu/menu";
 import { MenuButton } from "./menu-button";
 
 test("accessibility", async () => {
-  const user = await userEvent.setup();
+  const user = userEvent.setup();
 
   const { container, baseElement } = render(
     <MenuButton

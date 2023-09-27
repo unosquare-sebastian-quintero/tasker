@@ -4,7 +4,7 @@ import { axe } from "vitest-axe";
 import { ToggleButton } from "./toggle-button";
 
 test("call toggle callback when the button toggles", async () => {
-  const user = await userEvent.setup();
+  const user = userEvent.setup();
   const onToggle = vi.fn();
 
   render(<ToggleButton onToggle={onToggle} />);
@@ -17,7 +17,7 @@ test("call toggle callback when the button toggles", async () => {
 });
 
 test("accessibility", async () => {
-  const user = await userEvent.setup();
+  const user = userEvent.setup();
 
   const { container } = render(<ToggleButton>Test</ToggleButton>);
 

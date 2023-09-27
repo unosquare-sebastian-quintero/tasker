@@ -8,7 +8,7 @@ export function TaskList() {
   return (
     <ul className={styles["task-list"]}>
       {Object.entries(tasks).map(([uuid, task]) => (
-        <TaskListItem key={uuid} task={task} />
+        <TaskListItem key={uuid} uuid={uuid} task={task} />
       ))}
     </ul>
   );

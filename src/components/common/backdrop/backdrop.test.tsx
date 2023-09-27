@@ -4,7 +4,7 @@ import { axe } from "vitest-axe";
 import { Backdrop } from "./backdrop";
 
 test("close callback is called when clicked outside content", async () => {
-  const user = await userEvent.setup();
+  const user = userEvent.setup();
   const onClose = vi.fn();
 
   render(

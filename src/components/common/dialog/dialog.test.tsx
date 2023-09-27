@@ -4,7 +4,7 @@ import { axe } from "vitest-axe";
 import { Dialog } from "./dialog";
 
 test("close callback is called when backdrop is clicked", async () => {
-  const user = await userEvent.setup();
+  const user = userEvent.setup();
   const onClose = vi.fn();
 
   render(
@@ -19,7 +19,7 @@ test("close callback is called when backdrop is clicked", async () => {
 });
 
 test("close callback is called when close button is clicked", async () => {
-  const user = await userEvent.setup();
+  const user = userEvent.setup();
   const onClose = vi.fn();
 
   render(

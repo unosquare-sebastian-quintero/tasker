@@ -4,7 +4,7 @@ import { Menu } from "../menu/menu";
 import { MenuItem } from "./menu-item";
 
 test("close callback is called and focus is moved out of menu when Tab is pressed within a menu item", async () => {
-  const user = await userEvent.setup();
+  const user = userEvent.setup();
   const onClose = vi.fn();
 
   render(
@@ -32,7 +32,7 @@ test("close callback is called and focus is moved out of menu when Tab is presse
 });
 
 test("close callback is called and focus is moved out of menu when Shift+Tab is pressed within a menu item", async () => {
-  const user = await userEvent.setup();
+  const user = userEvent.setup();
   const onClose = vi.fn();
 
   render(
@@ -60,7 +60,7 @@ test("close callback is called and focus is moved out of menu when Shift+Tab is 
 });
 
 test("option-selected callback is called when an item is selected", async () => {
-  const user = await userEvent.setup();
+  const user = userEvent.setup();
   const onOptionSelected = vi.fn();
 
   render(
@@ -97,7 +97,7 @@ test("option-selected callback is called when an item is selected", async () => 
 });
 
 test("arrow down focus next item and arrow up focus previous item", async () => {
-  const user = await userEvent.setup();
+  const user = userEvent.setup();
 
   render(
     <Menu>
@@ -121,7 +121,7 @@ test("arrow down focus next item and arrow up focus previous item", async () => 
 });
 
 test("close callback is called when Escape key is pressed", async () => {
-  const user = await userEvent.setup();
+  const user = userEvent.setup();
   const onClose = vi.fn();
 
   render(

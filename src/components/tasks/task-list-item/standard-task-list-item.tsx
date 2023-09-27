@@ -43,26 +43,34 @@ export function StandardTaskListItem({
 
   return (
     <li className={styles["task-list-item"]}>
-      <ToggleButton onToggle={handleLockToggleButton}>
+      <ToggleButton
+        aria-label={`${isLocked ? "Unlock" : "Lock"} "${task.label}"`}
+        onToggle={handleLockToggleButton}
+      >
         {isLocked ? <IconLock /> : <IconLockOpen />}
       </ToggleButton>
       <span className={styles["task-list-item__icon"]}>{icon}</span>
       <span className={styles["task-list-item__label"]}>
         <Typography variant="body1">{task.label}</Typography>
       </span>
-      {menu ? (
-        <MenuButton
-          component={IconButton}
-          variant="borderless"
-          dialogTitle="Test"
-          menu={menu}
-        >
-          <IconArrowsShuffle />
-        </MenuButton>
+      {!isLocked ? (
+        <>
+          {menu ? (
+            <MenuButton
+              component={IconButton}
+              variant="borderless"
+              label={`Set "${task.label}" actions`}
+              dialogTitle="Test"
+              menu={menu}
+            >
+              <IconArrowsShuffle />
+            </MenuButton>
+          ) : null}
+          <IconButton variant="borderless" label={`Delete "${task.label}"`}>
+            <IconTrash />
+          </IconButton>
+        </>
       ) : null}
-      <IconButton variant="borderless">
-        <IconTrash />
-      </IconButton>
     </li>
   );
 }
