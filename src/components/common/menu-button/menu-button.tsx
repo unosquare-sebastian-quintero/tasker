@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useState } from "react";
+import { cloneElement, useState } from "react";
 import { BaseButtonProps } from "../base-button/base-button";
 import { Dialog } from "../dialog/dialog";
 import { Menu, MenuProps } from "../menu/menu";
@@ -56,6 +56,15 @@ export function MenuButton<TProps extends BaseButtonProps = BaseButtonProps>({
     closeMenu();
   }
 
+  function handleOptionSelected(value: string) {
+    closeMenu();
+    menu.props.onOptionSelected?.(value);
+  }
+
+  const menuClone = cloneElement(menu, {
+    onOptionSelected: handleOptionSelected,
+  });
+
   return (
     <>
       <Component
@@ -68,7 +77,7 @@ export function MenuButton<TProps extends BaseButtonProps = BaseButtonProps>({
       ></Component>
       {isMenuOpen ? (
         <Dialog title={dialogTitle} onClose={handleDialogClose}>
-          {menu}
+          {menuClone}
         </Dialog>
       ) : null}
     </>

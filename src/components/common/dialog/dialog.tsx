@@ -18,12 +18,12 @@ export function Dialog({
   className,
   ...props
 }: DialogProps) {
-  function handleIconButtonClick() {
+  function handleCloseAction() {
     onClose?.();
   }
 
   return (
-    <Backdrop>
+    <Backdrop onClose={handleCloseAction}>
       <div
         {...props}
         className={clsx(className, styles.dialog)}
@@ -39,7 +39,7 @@ export function Dialog({
             <IconButton
               variant="borderless"
               className={clsx(styles.dialog__button)}
-              onClick={handleIconButtonClick}
+              onClick={handleCloseAction}
             >
               <IconX size={16} />
             </IconButton>

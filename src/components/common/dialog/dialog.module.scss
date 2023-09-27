@@ -4,10 +4,12 @@
   background-color: $secondary;
   border: $border-secondary;
   border-radius: $border-radius;
+  box-shadow: $shadow;
   &__header {
     border-bottom: $border-secondary;
     display: flex;
     align-items: start;
+    position: relative;
   }
   &__title {
     display: flex;
@@ -15,7 +17,10 @@
     padding: 0.25rem 0.75rem;
   }
   &__close {
-    padding: 0.25rem;
+    position: absolute;
+    top: 50%;
+    right: 0.25rem;
+    transform: translateY(-50%);
   }
   &__button {
     color: $secondary-shade-4;

@@ -36,6 +36,8 @@ $space-2: 0.5rem;
 $space-3: 0.75rem;
 $space-4: 1rem;
 
+$shadow: 0 4px 16px rgba($primary, 0.2);
+
 %glassmorphism {
   backdrop-filter: blur(4px);
 }
