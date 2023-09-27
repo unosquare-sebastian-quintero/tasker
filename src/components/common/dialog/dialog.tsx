@@ -29,6 +29,7 @@ export function Dialog({
         className={clsx(className, styles.dialog)}
         role="dialog"
         aria-modal="true"
+        aria-label={title}
       >
         <header className={clsx(styles.dialog__header)}>
           <div className={clsx(styles.dialog__title)}>
@@ -38,6 +39,7 @@ export function Dialog({
           <div className={clsx(styles.dialog__close)}>
             <IconButton
               variant="borderless"
+              label="Close"
               className={clsx(styles.dialog__button)}
               onClick={handleCloseAction}
             >

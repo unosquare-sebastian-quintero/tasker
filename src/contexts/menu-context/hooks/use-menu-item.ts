@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { MenuItem, MenuItemRole } from "../state";
 import { useCheckRadioItem } from "./use-check-radio-item";
 import { useCloseMenu } from "./use-close-menu";
@@ -24,7 +24,12 @@ export function useMenuItem(role: MenuItemRole, value: string) {
           value: "",
         };
 
+  const { tabPressed } = state;
   const { isFocused, isChecked } = item;
+  const tabPress = useCallback(
+    () => dispatch({ type: "tab-press-action" }),
+    [dispatch],
+  );
   const closeMenu = useCloseMenu(dispatch);
   const toggleItemChecked = useToggleItemChecked(dispatch, index);
   const checkRadioItem = useCheckRadioItem(dispatch, index);
@@ -34,8 +39,10 @@ export function useMenuItem(role: MenuItemRole, value: string) {
 
   return useMemo(
     () => ({
+      tabPressed,
       isFocused,
       isChecked,
+      tabPress,
       closeMenu,
       toggleItemChecked,
       checkRadioItem,
@@ -51,6 +58,8 @@ export function useMenuItem(role: MenuItemRole, value: string) {
       isChecked,
       isFocused,
       selectItem,
+      tabPress,
+      tabPressed,
       toggleItemChecked,
     ],
   );

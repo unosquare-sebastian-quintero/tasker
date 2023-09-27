@@ -45,14 +45,17 @@ export function MenuItem({
   onCheckChange,
   className,
   onClick,
+  onKeyDown,
   onKeyUp,
   ...props
 }: MenuItemProps) {
   const role = ROLE_VARIANT_MAP[variant];
 
   const {
+    tabPressed,
     isFocused,
     isChecked,
+    tabPress,
     closeMenu,
     toggleItemChecked,
     checkRadioItem,
@@ -85,14 +88,24 @@ export function MenuItem({
     selectItem();
   }
 
+  function handleItemKeyDown(event: React.KeyboardEvent<HTMLLIElement>) {
+    onKeyDown?.(event);
+
+    switch (event.key) {
+      case "Tab":
+        tabPress();
+        closeMenu();
+        break;
+
+      default:
+        break;
+    }
+  }
+
   function handleItemKeyUp(event: React.KeyboardEvent<HTMLLIElement>) {
     onKeyUp?.(event);
 
     switch (event.key) {
-      case "Tab":
-        closeMenu();
-        break;
-
       case "Enter":
         selectItem();
         break;
@@ -131,9 +144,10 @@ export function MenuItem({
       {...ariaProps}
       ref={liRef}
       role={role}
-      tabIndex={0}
+      tabIndex={tabPressed ? -1 : 0}
       className={clsx(className, styles["menu-item"])}
       onClick={handleItemClick}
+      onKeyDown={handleItemKeyDown}
       onKeyUp={handleItemKeyUp}
     ></li>
   );

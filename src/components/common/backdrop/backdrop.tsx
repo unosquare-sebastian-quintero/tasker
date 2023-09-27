@@ -17,6 +17,7 @@ export function Backdrop({ onClose, children }: BackdropProps) {
     }
 
     const div = document.createElement("div");
+    div.setAttribute("role", "presentation");
     div.classList.add(styles.backdrop);
     div.addEventListener("click", onClick);
 

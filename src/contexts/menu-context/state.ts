@@ -11,6 +11,7 @@ export type MenuItem = {
 };
 
 export type MenuState = {
+  tabPressed: boolean;
   shouldClose: boolean;
   optionSelected: string | null;
   items: MenuItem[];
@@ -18,6 +19,10 @@ export type MenuState = {
 
 type UnknownAction = {
   type: string;
+};
+
+type TabPressAction = {
+  type: "tab-press-action";
 };
 
 type FocusFirstItemAction = {
@@ -76,6 +81,7 @@ type UnmountMenuItemAction = {
 };
 
 export type MenuAction =
+  | TabPressAction
   | FocusFirstItemAction
   | FocusNextItemAction
   | FocusPreviousItemAction
@@ -89,6 +95,7 @@ export type MenuAction =
   | UnmountMenuItemAction;
 
 export const intialMenuState: MenuState = {
+  tabPressed: false,
   shouldClose: false,
   optionSelected: null,
   items: [],
@@ -96,6 +103,12 @@ export const intialMenuState: MenuState = {
 
 export function menuReducer(state: MenuState, action: MenuAction) {
   switch (action.type) {
+    case "tab-press-action":
+      return produce(state, (draft) => {
+        draft.tabPressed = true;
+      });
+      break;
+
     case "focus-first-item":
       return produce(state, (draft) => {
         let shouldFocus = true;
