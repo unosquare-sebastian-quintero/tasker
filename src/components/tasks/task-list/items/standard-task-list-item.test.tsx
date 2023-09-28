@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "vitest-axe";
-import { MenuItem } from "../../common/menu-item/menu-item";
-import { Menu } from "../../common/menu/menu";
+import { MenuItem } from "../../../common/menu-item/menu-item";
+import { Menu } from "../../../common/menu/menu";
 import { StandardTaskListItem } from "./standard-task-list-item";
 
 test("lock button switchs between read-only and edit modes", async () => {

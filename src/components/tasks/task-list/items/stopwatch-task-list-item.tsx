@@ -1,5 +1,5 @@
-import { MenuItem } from "../../common/menu-item/menu-item";
-import { Menu } from "../../common/menu/menu";
+import { MenuItem } from "../../../common/menu-item/menu-item";
+import { Menu } from "../../../common/menu/menu";
 import {
   StandardTaskListItem,
   StandardTaskListItemProps,

@@ -1,19 +1,18 @@
 import {
   Icon,
-  IconArrowsShuffle,
   IconClockFilled,
   IconLock,
   IconLockOpen,
-  IconTrash,
   TablerIconsProps,
 } from "@tabler/icons-react";
+import clsx from "clsx";
 import { useState } from "react";
-import { Task, TaskType } from "../../../state/tasks/model";
-import { IconButton } from "../../common/icon-button/icon-button";
-import { MenuButton } from "../../common/menu-button/menu-button";
-import { Menu, MenuProps } from "../../common/menu/menu";
-import { ToggleButton } from "../../common/toggle-button/toggle-button";
-import { Typography } from "../../common/typography/typography";
+import { Task, TaskType } from "../../../../state/tasks/model";
+import { Menu, MenuProps } from "../../../common/menu/menu";
+import { Textarea } from "../../../common/textarea/textarea";
+import { ToggleButton } from "../../../common/toggle-button/toggle-button";
+import { StandardTaskListItemEditActions } from "./actions/standard-task-list-item-edit-actions";
+import { StandardTaskListItemReadOnlyActions } from "./actions/standard-task-list-item-read-only-actions";
 import styles from "./standard-task-list-item.module.scss";
 
 const ICON_TYPE_MAP: Record<
@@ -30,6 +29,7 @@ export type StandardTaskListItemProps = {
 };
 
 export function StandardTaskListItem({
+  uuid,
   task,
   menu,
 }: StandardTaskListItemProps) {
@@ -50,27 +50,23 @@ export function StandardTaskListItem({
         {isLocked ? <IconLock /> : <IconLockOpen />}
       </ToggleButton>
       <span className={styles["task-list-item__icon"]}>{icon}</span>
-      <span className={styles["task-list-item__label"]}>
-        <Typography variant="body1">{task.label}</Typography>
-      </span>
+      <div
+        className={clsx(styles["task-list-item__label"], {
+          [styles["task-list-item__label--read-only"]]: isLocked,
+        })}
+      >
+        <Textarea
+          readOnly={isLocked}
+          className={clsx("font-sans", styles["task-list-item__textarea"])}
+        >
+          {task.label}
+        </Textarea>
+      </div>
       {!isLocked ? (
-        <>
-          {menu ? (
-            <MenuButton
-              component={IconButton}
-              variant="borderless"
-              label={`Set "${task.label}" actions`}
-              dialogTitle="Test"
-              menu={menu}
-            >
-              <IconArrowsShuffle />
-            </MenuButton>
-          ) : null}
-          <IconButton variant="borderless" label={`Delete "${task.label}"`}>
-            <IconTrash />
-          </IconButton>
-        </>
-      ) : null}
+        <StandardTaskListItemEditActions uuid={uuid} task={task} menu={menu} />
+      ) : (
+        <StandardTaskListItemReadOnlyActions uuid={uuid} task={task} />
+      )}
     </li>
   );
 }

@@ -1,5 +1,5 @@
 import { useStore } from "../../../state";
-import { TaskListItem } from "../task-list-item/task-list-item";
+import { TaskListItem } from "./item/task-list-item";
 import styles from "./task-list.module.scss";
 
 export function TaskList() {

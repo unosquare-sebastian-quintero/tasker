@@ -30,6 +30,13 @@ export const createTaskSlice: StateCreator<State, [], [], TaskSlice> = (
     );
     return uuid;
   },
+  removeTask(uuid) {
+    set((state) =>
+      produce(state, (draft) => {
+        delete draft.tasks[uuid];
+      }),
+    );
+  },
   pushTaskAction(uuid, action) {
     set((state) =>
       produce(state, (draft) => {
