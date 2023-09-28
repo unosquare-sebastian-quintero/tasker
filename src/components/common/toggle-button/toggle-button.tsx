@@ -25,8 +25,8 @@ export function ToggleButton({
   ) {
     onClick?.(event);
 
+    onToggle?.(!isPressed, event);
     setIsPressed((pressed) => {
-      onToggle?.(!pressed, event);
       return !pressed;
     });
   }

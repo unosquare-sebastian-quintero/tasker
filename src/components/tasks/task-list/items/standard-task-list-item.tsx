@@ -58,9 +58,8 @@ export function StandardTaskListItem({
         <Textarea
           readOnly={isLocked}
           className={clsx("font-sans", styles["task-list-item__textarea"])}
-        >
-          {task.label}
-        </Textarea>
+          defaultValue={task.label}
+        />
       </div>
       {!isLocked ? (
         <StandardTaskListItemEditActions uuid={uuid} task={task} menu={menu} />

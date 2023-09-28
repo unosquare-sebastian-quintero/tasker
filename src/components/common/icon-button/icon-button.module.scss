@@ -9,6 +9,7 @@
   justify-content: center;
   align-items: center;
   &.icon-button--bordered {
+    box-sizing: border-box;
     border: $border-secondary;
   }
   &:hover {
