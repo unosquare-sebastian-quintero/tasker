@@ -8,13 +8,13 @@ export default defineConfig({
     react(),
     electron([
       {
-        entry: "electron/main.ts",
+        entry: "src/electron/main.ts",
         vite: {
           publicDir: 'resources'
         }
       },
       {
-        entry: "electron/preload.ts",
+        entry: "src/electron/preload.ts",
         onstart(options) {
           options.reload();
         },

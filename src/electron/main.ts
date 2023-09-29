@@ -9,6 +9,7 @@ let canOpenWindow = true;
 let isPinned = false;
 
 ipcMain.on(EVENT_TOGGLE_PIN_WINDOW, () => {
+  console.log('test')
   console.log("toggle pin window");
   isPinned = !isPinned;
 });

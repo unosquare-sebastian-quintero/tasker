@@ -24,6 +24,6 @@
     "types": ["vitest/globals"]
   },
   "exclude": ["node_modules"],
-  "include": ["src", "electron", "vitest.setup.ts", "models/task.ts"],
+  "include": ["src", "vitest.setup.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
