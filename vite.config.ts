@@ -10,8 +10,8 @@ export default defineConfig({
       {
         entry: "src/electron/main.ts",
         vite: {
-          publicDir: 'resources'
-        }
+          publicDir: "resources",
+        },
       },
       {
         entry: "src/electron/preload.ts",

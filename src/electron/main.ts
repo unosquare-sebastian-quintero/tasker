@@ -1,20 +1,11 @@
 import { join } from "path";
 import { app, BrowserWindow, ipcMain, Tray } from "electron";
 import ElectronPositioner from "electron-positioner";
-import { EVENT_CHANGE_ICON, EVENT_TOGGLE_PIN_WINDOW } from "./events";
+import { EVENT_CHANGE_ICON, EVENT_WINDOW_LOAD } from "./events";
+import { registerIpcHandlers } from "./ipc";
+import { state, toShared } from "./state";
 
-// TODO: zustand
-let canOpenWindow = true;
-
-let isPinned = false;
-
-ipcMain.on(EVENT_TOGGLE_PIN_WINDOW, () => {
-  console.log('test')
-  console.log("toggle pin window");
-  isPinned = !isPinned;
-});
-
-function createRichContextualMenu(trayBounds: Electron.Rectangle) {
+function createRichContextualMenuWindow(trayBounds: Electron.Rectangle) {
   const width = 360;
   const height = 240;
   const window = new BrowserWindow({
@@ -36,27 +27,36 @@ function createRichContextualMenu(trayBounds: Electron.Rectangle) {
     positioner.move("trayCenter", trayBounds);
 
     window.show();
+    state.app.setWindowOpen(true);
   });
 
   window.addListener("blur", () => {
-    if (isPinned) {
+    if (state.app.windowPinned) {
       return;
     }
 
     window.close();
-    canOpenWindow = true;
+    state.app.setWindowOpen(false);
   });
 
+  let loadWindow;
   if (process.env["VITE_DEV_SERVER_URL"]) {
-    window.loadURL(process.env["VITE_DEV_SERVER_URL"]);
+    window.webContents.openDevTools({ mode: "detach", activate: false });
+    loadWindow = window.loadURL(process.env["VITE_DEV_SERVER_URL"]);
   } else {
-    window.loadFile("dist/index.html");
+    loadWindow = window.loadFile("dist/index.html");
   }
+  loadWindow.then(() => {
+    console.log("webContents");
+    window.webContents.send(EVENT_WINDOW_LOAD, toShared(state));
+  });
 
-  canOpenWindow = false;
+  return window;
 }
 
 app.whenReady().then(function ready() {
+  registerIpcHandlers();
+
   let iconIndex = 0;
   const iconList = [
     join(__dirname, "checklistTemplate.png"),
@@ -80,12 +80,12 @@ app.whenReady().then(function ready() {
   });
 
   tray.addListener("click", () => {
-    if (!canOpenWindow) {
+    if (state.app.windowOpen) {
       return;
     }
 
     // const { x, y, width, height } = tray.getBounds();
-    createRichContextualMenu(tray.getBounds());
+    createRichContextualMenuWindow(tray.getBounds());
   });
 });
 
