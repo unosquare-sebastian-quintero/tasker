@@ -1,4 +1,4 @@
-import { Task, TaskAction } from "./model";
+import { Task, TaskAction } from "../../../models/task";
 
 export interface TaskSlice {
   tasks: Record<string, Task>;

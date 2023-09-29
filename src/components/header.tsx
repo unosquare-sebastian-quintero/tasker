@@ -16,7 +16,11 @@ export function Header() {
     <header className={styles.header}>
       <Typography variant="h1">Tasker</Typography>
       <div className={styles.header__action}>
-        <IconButton variant="bordered" onClick={handleButtonClick}>
+        <IconButton
+          variant="borderless"
+          label={isPinned ? "Unpin window" : "Pin window"}
+          onClick={handleButtonClick}
+        >
           {isPinned ? <IconPinned size={16} /> : <IconPin size={16} />}
         </IconButton>
       </div>

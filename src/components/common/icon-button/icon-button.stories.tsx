@@ -18,6 +18,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     variant: "bordered",
+    label: "Pin",
     children: <IconPin />,
   },
 };
@@ -25,6 +26,7 @@ export const Default: Story = {
 export const Small: Story = {
   args: {
     variant: "bordered",
+    label: "Lock",
     children: <IconLock size={16} />,
   },
 };
@@ -32,6 +34,7 @@ export const Small: Story = {
 export const Borderless: Story = {
   args: {
     variant: "borderless",
+    label: "X",
     children: <IconX />,
   },
 };

@@ -7,7 +7,7 @@ import {
 } from "@tabler/icons-react";
 import clsx from "clsx";
 import { useState } from "react";
-import { Task, TaskType } from "../../../../state/tasks/model";
+import { Task, TaskType } from "../../../../../models/task";
 import { Menu, MenuProps } from "../../../common/menu/menu";
 import { Textarea } from "../../../common/textarea/textarea";
 import { ToggleButton } from "../../../common/toggle-button/toggle-button";

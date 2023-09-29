@@ -23,6 +23,7 @@
 
     "types": ["vitest/globals"]
   },
-  "include": ["src", "electron", "vitest.setup.ts", "api-env.d.ts"],
+  "exclude": ["node_modules"],
+  "include": ["src", "electron", "vitest.setup.ts", "models/task.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

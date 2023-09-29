@@ -1,6 +1,6 @@
 import { IconArrowsShuffle, IconTrash } from "@tabler/icons-react";
 import { useStore } from "../../../../../state";
-import { Task } from "../../../../../state/tasks/model";
+import { Task } from "../../../../../../models/task";
 import { IconButton } from "../../../../common/icon-button/icon-button";
 import { MenuButton } from "../../../../common/menu-button/menu-button";
 import { Menu, MenuProps } from "../../../../common/menu/menu";

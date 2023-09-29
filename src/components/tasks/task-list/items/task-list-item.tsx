@@ -1,4 +1,4 @@
-import { TaskType } from "../../../../state/tasks/model";
+import { TaskType } from "../../../../../models/task";
 import {
   StandardTaskListItem,
   StandardTaskListItemProps,

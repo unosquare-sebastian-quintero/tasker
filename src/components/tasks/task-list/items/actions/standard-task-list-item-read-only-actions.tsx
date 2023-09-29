@@ -1,5 +1,5 @@
 import { IconPlayerPlay, IconPlayerStop } from "@tabler/icons-react";
-import { Task } from "../../../../../state/tasks/model";
+import { Task } from "../../../../../../models/task";
 import { IconButton } from "../../../../common/icon-button/icon-button";
 import { Typography } from "../../../../common/typography/typography";
 import styles from "./standard-task-list-item-read-only-actions.module.scss";
@@ -13,6 +13,7 @@ export function StandardTaskListItemReadOnlyActions({
   uuid,
   task,
 }: StandardTaskListItemReadOnlyActionsProps) {
+  console.log(uuid, task);
   return (
     <div className={styles.actions}>
       <IconButton variant="bordered" label="Start" size={32}>

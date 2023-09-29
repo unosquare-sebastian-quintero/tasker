@@ -4,11 +4,11 @@ import ElectronPositioner from "electron-positioner";
 import { EVENT_CHANGE_ICON, EVENT_TOGGLE_PIN_WINDOW } from "./events";
 
 // TODO: zustand
-var canOpenWindow = true;
+let canOpenWindow = true;
 
-var isPinned = false;
+let isPinned = false;
 
-ipcMain.on(EVENT_TOGGLE_PIN_WINDOW, (event) => {
+ipcMain.on(EVENT_TOGGLE_PIN_WINDOW, () => {
   console.log("toggle pin window");
   isPinned = !isPinned;
 });
@@ -16,15 +16,12 @@ ipcMain.on(EVENT_TOGGLE_PIN_WINDOW, (event) => {
 function createRichContextualMenu(trayBounds: Electron.Rectangle) {
   const width = 360;
   const height = 240;
-  var window = new BrowserWindow({
+  const window = new BrowserWindow({
     alwaysOnTop: true,
     focusable: true,
     movable: false,
     resizable: false,
     frame: false,
-    // transparent: true,
-    // x: x - width / 2,
-    // y,
     show: false,
     width,
     height,
@@ -34,7 +31,7 @@ function createRichContextualMenu(trayBounds: Electron.Rectangle) {
   });
 
   window.once("ready-to-show", () => {
-    var positioner = new ElectronPositioner(window);
+    const positioner = new ElectronPositioner(window);
     positioner.move("trayCenter", trayBounds);
 
     window.show();
@@ -59,13 +56,13 @@ function createRichContextualMenu(trayBounds: Electron.Rectangle) {
 }
 
 app.whenReady().then(function ready() {
-  var iconIndex = 0;
-  var iconList = [
+  let iconIndex = 0;
+  const iconList = [
     join(__dirname, "checklistTemplate.png"),
     join(__dirname, "clockTemplate.png"),
   ];
 
-  var tray = new Tray(iconList[iconIndex]);
+  const tray = new Tray(iconList[iconIndex]);
 
   tray.setToolTip("Create task and track time");
   // tray.setTitle("Timesheet");
