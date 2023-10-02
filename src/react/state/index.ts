@@ -10,7 +10,6 @@ export const useStore = create<State>((...args) => ({
 
 if (window.tasker != null) {
   window.tasker.onLoad(function onLoaded(state) {
-    console.log("Sync", state);
     useStore.setState({
       isPinned: state.app.isPinned,
     });

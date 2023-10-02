@@ -1,5 +1,5 @@
 import { IconPlayerPlay, IconPlayerStop } from "@tabler/icons-react";
-import { Task } from "../../../../../../models/task";
+import { Task } from "../../../../../../models/tasks";
 import { IconButton } from "../../../../common/icon-button/icon-button";
 import { Typography } from "../../../../common/typography/typography";
 import styles from "./standard-task-list-item-read-only-actions.module.scss";

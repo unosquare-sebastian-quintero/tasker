@@ -5,14 +5,13 @@ import {
   IconLockOpen,
   TablerIconsProps,
 } from "@tabler/icons-react";
-import clsx from "clsx";
 import { useState } from "react";
-import { Task, TaskType } from "../../../../../models/task";
+import { Task, TaskType } from "../../../../../models/tasks";
 import { Menu, MenuProps } from "../../../common/menu/menu";
-import { Textarea } from "../../../common/textarea/textarea";
 import { ToggleButton } from "../../../common/toggle-button/toggle-button";
 import { StandardTaskListItemEditActions } from "./actions/standard-task-list-item-edit-actions";
 import { StandardTaskListItemReadOnlyActions } from "./actions/standard-task-list-item-read-only-actions";
+import { StandardTaskListItemContent } from "./content/standard-task-list-item-content";
 import styles from "./standard-task-list-item.module.scss";
 
 const ICON_TYPE_MAP: Record<
@@ -50,17 +49,11 @@ export function StandardTaskListItem({
         {isLocked ? <IconLock /> : <IconLockOpen />}
       </ToggleButton>
       <span className={styles["task-list-item__icon"]}>{icon}</span>
-      <div
-        className={clsx(styles["task-list-item__label"], {
-          [styles["task-list-item__label--read-only"]]: isLocked,
-        })}
-      >
-        <Textarea
-          readOnly={isLocked}
-          className={clsx("font-sans", styles["task-list-item__textarea"])}
-          defaultValue={task.label}
-        />
-      </div>
+      <StandardTaskListItemContent
+        uuid={uuid}
+        isLocked={isLocked}
+        text={task.label}
+      />
       {!isLocked ? (
         <StandardTaskListItemEditActions uuid={uuid} task={task} menu={menu} />
       ) : (

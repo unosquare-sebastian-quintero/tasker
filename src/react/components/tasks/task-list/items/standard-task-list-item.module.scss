@@ -17,26 +17,4 @@
     display: flex;
     align-items: center;
   }
-  &__label {
-    box-sizing: border-box;
-    flex-grow: 1;
-    position: relative;
-    display: flex;
-    align-items: center;
-    &--read-only {
-      padding: 0.25rem;
-    }
-  }
-  &__textarea {
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    &:focus {
-      top: 0;
-      box-shadow: $shadow;
-      z-index: $layer-2;
-      transform: translateY(0);
-    }
-  }
 }

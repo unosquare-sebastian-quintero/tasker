@@ -6,22 +6,11 @@ import { TaskSlice } from "./slice";
 
 export const createTaskSlice: StateCreator<State, [], [], TaskSlice> = (
   set,
+  get,
 ) => ({
-  tasks: {
-    test: {
-      type: "stopwatch",
-      label: "Test",
-      state: "idle",
-      actions: [],
-    },
-    hello: {
-      type: "stopwatch",
-      label: "Test",
-      state: "idle",
-      actions: [],
-    },
-  },
+  tasks: {},
   addTask(task) {
+    console.log("[state] addTask", task);
     const uuid = v4();
     set((state) =>
       produce(state, (draft) => {
@@ -30,7 +19,20 @@ export const createTaskSlice: StateCreator<State, [], [], TaskSlice> = (
     );
     return uuid;
   },
+  updateTask(uuid, task) {
+    console.log("[state] updateTask", uuid, task);
+    if (get().tasks[uuid] == null) {
+      return;
+    }
+
+    set((state) =>
+      produce(state, (draft) => {
+        draft.tasks[uuid] = { ...draft.tasks[uuid], ...task };
+      }),
+    );
+  },
   removeTask(uuid) {
+    console.log("[state] removeTask", uuid);
     set((state) =>
       produce(state, (draft) => {
         delete draft.tasks[uuid];

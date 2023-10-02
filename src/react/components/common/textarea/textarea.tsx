@@ -3,9 +3,10 @@ import { useRef, useState } from "react";
 import { getClientScrollFactor } from "../../../utilities/dom-utils";
 import styles from "./textarea.module.scss";
 
-export type TextareaProps = React.HTMLAttributes<HTMLTextAreaElement> & {
-  readOnly: boolean;
-};
+export type TextareaProps =
+  React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
+    readOnly: boolean;
+  };
 
 export function Textarea({
   readOnly,

@@ -11,3 +11,5 @@ export type Task = {
   state: "idle" | "running" | "paused" | "stopped" | "finished";
   actions: TaskAction[];
 };
+
+export type TaskList = Record<string, Task>;
