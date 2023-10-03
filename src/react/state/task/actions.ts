@@ -1,9 +1,9 @@
 import { produce } from "immer";
 import { v4 } from "uuid";
-import { Task, TaskAction } from "../../../models/tasks";
+import { TaskItem, TaskAction } from "../../../models/tasks";
 import { taskerStore } from "../../../state";
 
-export function addTask(task: Task) {
+export function addTask(task: TaskItem) {
   console.log("[state] addTask", task);
   const uuid = v4();
   taskerStore.setState((state) =>
@@ -14,7 +14,7 @@ export function addTask(task: Task) {
   return uuid;
 }
 
-export function updateTask(uuid: string, task: Partial<Task>) {
+export function updateTask(uuid: string, task: Partial<TaskItem>) {
   console.log("[state] updateTask", uuid, task);
   if (taskerStore.getState().task.items[uuid] == null) {
     return;

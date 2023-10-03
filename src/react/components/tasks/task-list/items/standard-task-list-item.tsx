@@ -6,7 +6,7 @@ import {
   TablerIconsProps,
 } from "@tabler/icons-react";
 import { useState } from "react";
-import { Task, TaskType } from "../../../../../models/tasks";
+import { TaskItem, TaskType } from "../../../../../models/tasks";
 import { Menu, MenuProps } from "../../../common/menu/menu";
 import { ToggleButton } from "../../../common/toggle-button/toggle-button";
 import { StandardTaskListItemEditActions } from "./actions/standard-task-list-item-edit-actions";
@@ -23,7 +23,7 @@ const ICON_TYPE_MAP: Record<
 
 export type StandardTaskListItemProps = {
   uuid: string;
-  task: Task;
+  task: TaskItem;
   menu?: React.ReactElement<MenuProps, typeof Menu>;
 };
 

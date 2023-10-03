@@ -5,11 +5,11 @@ export type TaskAction = {
   payload: unknown;
 };
 
-export type Task = {
+export type TaskItem = {
   type: TaskType;
   label: string;
   state: "idle" | "running" | "paused" | "stopped" | "finished";
   actions: TaskAction[];
 };
 
-export type TaskList = Record<string, Task>;
+export type TaskList = Record<string, TaskItem>;

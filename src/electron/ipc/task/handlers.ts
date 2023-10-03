@@ -1,5 +1,5 @@
 import { ipcMain } from "electron";
-import { Task } from "../../../models/tasks";
+import { TaskItem } from "../../../models/tasks";
 import { CHANNEL_MUTATE_TASK, CHANNEL_QUERY_TASK } from "../../channels";
 
 export type TaskQuery = {
@@ -7,8 +7,8 @@ export type TaskQuery = {
 };
 
 export type TaskMutation = {
-  create?: Task;
-  update?: { uuid: string } & Partial<Task>;
+  create?: TaskItem;
+  update?: { uuid: string } & Partial<TaskItem>;
   delete?: { uuid: string };
 };
 

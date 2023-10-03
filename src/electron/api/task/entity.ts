@@ -1,15 +1,15 @@
 import { ipcRenderer } from "electron";
-import { Task, TaskList } from "../../../models/tasks";
+import { TaskItem, TaskList } from "../../../models/tasks";
 import { CHANNEL_MUTATE_TASK, CHANNEL_QUERY_TASK } from "../../channels";
 
 export interface TaskEntity {
-  createOne(task: Task): Promise<Task>;
+  createOne(task: TaskItem): Promise<TaskItem>;
 
   readMany(): Promise<TaskList>;
 
-  updateOne(uuid: string, task: Partial<Task>): Promise<Task>;
+  updateOne(uuid: string, task: Partial<TaskItem>): Promise<TaskItem>;
 
-  deleteOne(uuid: string): Promise<Task>;
+  deleteOne(uuid: string): Promise<TaskItem>;
 }
 
 export function createTaskEntity() {
