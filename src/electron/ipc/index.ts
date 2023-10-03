@@ -1,5 +1,7 @@
-import { registerWindowHandlers } from "./window-handlers";
+import { registerAppHandlers } from "./app/handlers";
+import { registerTaskHandlers } from "./task/handlers";
 
 export function registerIpcHandlers() {
-  registerWindowHandlers();
+  registerAppHandlers();
+  registerTaskHandlers();
 }

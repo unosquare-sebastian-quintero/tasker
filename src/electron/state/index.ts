@@ -1,23 +1,7 @@
-import { app } from "./app";
-import { task } from "./task";
+import * as app from "./app/actions";
+import * as task from "./task/actions";
 
-export const state = {
+export const taskerAction = {
   app,
   task,
 };
-
-export type State = typeof state;
-
-export type SharedState = {
-  app: {
-    isPinned: boolean;
-  };
-};
-
-export function toShared(state: State) {
-  return {
-    app: {
-      isPinned: state.app.windowPinned,
-    },
-  } satisfies SharedState;
-}

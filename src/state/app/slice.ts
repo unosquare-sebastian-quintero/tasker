@@ -9,6 +9,7 @@ export const createAppSlice: StateCreator<
   AppSlice
 > = () => ({
   window: {
+    isOpen: false,
     isPinned: false,
   },
 });

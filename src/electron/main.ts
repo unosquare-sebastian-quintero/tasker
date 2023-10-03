@@ -1,14 +1,24 @@
 import { join } from "path";
 import { app, BrowserWindow, ipcMain, Tray } from "electron";
 import ElectronPositioner from "electron-positioner";
-import { EVENT_CHANGE_ICON, EVENT_WINDOW_LOAD } from "./events";
+import { taskerStore } from "../state";
+import { EVENT_CHANGE_ICON } from "./events";
 import { registerIpcHandlers } from "./ipc";
-import { state, toShared } from "./state";
+import { taskerAction } from "./state";
+
+function isDev() {
+  return !!process.env["VITE_DEV_SERVER_URL"];
+}
 
 function createRichContextualMenuWindow(trayBounds: Electron.Rectangle) {
-  const width = 360;
-  const height = 240;
+  // const width = 360;
+  // const height = 240;
+
+  const width = 480;
+  const height = 320;
+
   const window = new BrowserWindow({
+    skipTaskbar: true,
     alwaysOnTop: true,
     focusable: true,
     movable: false,
@@ -18,6 +28,8 @@ function createRichContextualMenuWindow(trayBounds: Electron.Rectangle) {
     width,
     height,
     webPreferences: {
+      nodeIntegration: false,
+      contextIsolation: true,
       preload: join(__dirname, "preload.js"),
     },
   });
@@ -27,34 +39,41 @@ function createRichContextualMenuWindow(trayBounds: Electron.Rectangle) {
     positioner.move("trayCenter", trayBounds);
 
     window.show();
-    state.app.setWindowOpen(true);
+    taskerAction.app.openWindow();
   });
 
   window.addListener("blur", () => {
-    if (state.app.windowPinned) {
+    if (taskerStore.getState().app.window.isPinned) {
       return;
     }
 
-    window.close();
-    state.app.setWindowOpen(false);
+    window.hide();
+    taskerAction.app.closeWindow();
   });
 
-  let loadWindow;
   if (process.env["VITE_DEV_SERVER_URL"]) {
     window.webContents.openDevTools({ mode: "detach", activate: false });
-    loadWindow = window.loadURL(process.env["VITE_DEV_SERVER_URL"]);
+    window.loadURL(process.env["VITE_DEV_SERVER_URL"]);
   } else {
-    loadWindow = window.loadFile("dist/index.html");
+    window.loadFile(join(__dirname, "..", "dist", "index.html"));
   }
-  loadWindow.then(() => {
-    console.log("webContents");
-    window.webContents.send(EVENT_WINDOW_LOAD, toShared(state));
-  });
 
   return window;
 }
 
 app.whenReady().then(function ready() {
+  if (isDev()) {
+    import("electron-devtools-installer").then(
+      ({ default: install, REACT_DEVELOPER_TOOLS }) => {
+        install(REACT_DEVELOPER_TOOLS, {
+          loadExtensionOptions: { allowFileAccess: true },
+        })
+          .then(console.debug)
+          .catch(console.error);
+      },
+    );
+  }
+
   registerIpcHandlers();
 
   let iconIndex = 0;
@@ -64,6 +83,7 @@ app.whenReady().then(function ready() {
   ];
 
   const tray = new Tray(iconList[iconIndex]);
+  let window: BrowserWindow | null = null;
 
   tray.setToolTip("Create task and track time");
   // tray.setTitle("Timesheet");
@@ -80,12 +100,16 @@ app.whenReady().then(function ready() {
   });
 
   tray.addListener("click", () => {
-    if (state.app.windowOpen) {
+    if (taskerStore.getState().app.window.isOpen) {
       return;
     }
 
-    // const { x, y, width, height } = tray.getBounds();
-    createRichContextualMenuWindow(tray.getBounds());
+    if (window != null) {
+      window.show();
+      return;
+    }
+
+    window = createRichContextualMenuWindow(tray.getBounds());
   });
 });
 
