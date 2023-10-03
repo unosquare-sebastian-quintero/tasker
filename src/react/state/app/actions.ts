@@ -1,3 +1,3 @@
 export function togglePinWindow() {
-  window.tasker.togglePinWindow();
+  window.tasker.app.togglePinWindow();
 }

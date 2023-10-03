@@ -9,6 +9,10 @@ import {
 } from "./channels";
 import { EVENT_CHANGE_ICON } from "./events";
 
+interface AppSlice {
+  togglePinWindow(): void;
+}
+
 interface StateCollection {
   subscribe(onUpdate: (state: TaskerState) => void): void;
 }
@@ -24,9 +28,9 @@ interface TaskCollection {
 }
 
 interface TaskerAPI {
-  togglePinWindow(): void;
   changeIcon(): void;
 
+  app: AppSlice;
   state: StateCollection;
   task: TaskCollection;
 }
@@ -38,15 +42,20 @@ declare global {
 }
 
 contextBridge.exposeInMainWorld("tasker", {
-  togglePinWindow() {
-    ipcRenderer.send(CHANNEL_TOGGLE_PIN_WINDOW);
-  },
   changeIcon() {
     ipcRenderer.send(EVENT_CHANGE_ICON);
   },
 
+  app: {
+    togglePinWindow() {
+      ipcRenderer.send(CHANNEL_TOGGLE_PIN_WINDOW);
+    },
+  },
+
   state: {
     subscribe(onUpdate) {
+      // FIXME: looks like a memory leak
+
       ipcRenderer.send(CHANNEL_SYNC_STATE);
 
       ipcRenderer.on(

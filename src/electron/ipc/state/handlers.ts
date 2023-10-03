@@ -11,6 +11,7 @@ export function registerStateHandlers() {
       unsubscribe!();
     }
 
+    event.sender.send(CHANNEL_SYNC_STATE, taskerStore.getState());
     const unsubscribe = taskerStore.subscribe((state) => {
       event.sender.send(CHANNEL_SYNC_STATE, state);
     });
