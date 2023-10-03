@@ -4,7 +4,12 @@
   "version": "0.0.0",
   "main": "dist-electron/main.js",
   "build": {
-    "appId": "unosquare.timesheet"
+    "appId": "unosquare.tasker",
+    "mac": {
+      "extendInfo": {
+        "LSUIElement": true
+      }
+    }
   },
   "scripts": {
     "dev": "vite",
@@ -45,11 +50,12 @@
     "@types/react": "18.2.15",
     "@types/react-dom": "18.2.7",
     "@types/uuid": "9.0.4",
-    "@typescript-eslint/eslint-plugin": "6.0.0",
-    "@typescript-eslint/parser": "6.0.0",
+    "@typescript-eslint/eslint-plugin": "6.7.4",
+    "@typescript-eslint/parser": "6.7.4",
     "@vitejs/plugin-react-swc": "3.3.2",
     "electron-builder": "24.6.4",
-    "eslint": "8.45.0",
+    "electron-devtools-installer": "3.2.0",
+    "eslint": "8.50.0",
     "eslint-config-prettier": "9.0.0",
     "eslint-plugin-jest-dom": "5.1.0",
     "eslint-plugin-react": "7.33.2",
@@ -61,7 +67,7 @@
     "prettier": "3.0.3",
     "sass": "1.67.0",
     "storybook": "7.4.3",
-    "typescript": "5.0.2",
+    "typescript": "5.2.2",
     "vite": "4.4.5",
     "vite-plugin-electron": "0.14.1",
     "vitest": "0.34.5",
