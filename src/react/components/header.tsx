@@ -1,12 +1,12 @@
 import { IconPin, IconPinned } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
-import { useStore } from "../state";
+import { useTaskerStore } from "../state";
 import { IconButton } from "./common/icon-button/icon-button";
 import { Typography } from "./common/typography/typography";
 import styles from "./header.module.scss";
 
 export function Header() {
-  const defaultPinned = useStore((state) => state.isPinned);
+  const defaultPinned = useTaskerStore((state) => state.app.window.isPinned);
   const [isPinned, setIsPinned] = useState(defaultPinned);
 
   useEffect(() => {

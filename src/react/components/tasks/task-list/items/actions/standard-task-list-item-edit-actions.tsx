@@ -1,6 +1,6 @@
 import { IconArrowsShuffle, IconTrash } from "@tabler/icons-react";
-import { useStore } from "../../../../../state";
 import { Task } from "../../../../../../models/tasks";
+import { taskerAction } from "../../../../../state";
 import { IconButton } from "../../../../common/icon-button/icon-button";
 import { MenuButton } from "../../../../common/menu-button/menu-button";
 import { Menu, MenuProps } from "../../../../common/menu/menu";
@@ -16,10 +16,8 @@ export function StandardTaskListItemEditActions({
   task,
   menu,
 }: StandardTaskListItemEditActionsProps) {
-  const deleteTask = useStore((state) => state.removeTask);
-
   function handleDeleteButtonClick() {
-    deleteTask(uuid);
+    taskerAction.task.removeTask(uuid);
   }
 
   return (

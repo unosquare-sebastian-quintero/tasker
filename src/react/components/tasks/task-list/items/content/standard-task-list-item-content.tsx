@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useStore } from "../../../../../state";
+import { taskerAction } from "../../../../../state";
 import { Textarea } from "../../../../common/textarea/textarea";
 import styles from "./standard-task-list-item-content.module.scss";
 
@@ -14,10 +14,8 @@ export function StandardTaskListItemContent({
   isLocked,
   text,
 }: StandardTaskListItemContentProps) {
-  const updateTask = useStore((state) => state.updateTask);
-
   function handleTextareaChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
-    updateTask(uuid, {
+    taskerAction.task.updateTask(uuid, {
       label: event.target.value,
     });
   }

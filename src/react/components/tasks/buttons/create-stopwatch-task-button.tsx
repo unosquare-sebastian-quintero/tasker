@@ -1,12 +1,10 @@
 import { IconClock } from "@tabler/icons-react";
-import { useStore } from "../../../state";
+import { taskerAction } from "../../../state";
 import { Button } from "../../common/button/button";
 
 export function CreateStopwatchTaskButton() {
-  const addTask = useStore((state) => state.addTask);
-
   function handleButtonClick() {
-    addTask({
+    taskerAction.task.addTask({
       type: "stopwatch",
       label: "New Stopwatch",
       state: "idle",
