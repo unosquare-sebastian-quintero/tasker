@@ -1,11 +1,17 @@
 import { contextBridge, ipcRenderer } from "electron";
 import { Task, TaskList } from "../models/tasks";
+import { TaskerState } from "../state/types";
 import {
   CHANNEL_MUTATE_TASK,
   CHANNEL_QUERY_TASK,
+  CHANNEL_SYNC_STATE,
   CHANNEL_TOGGLE_PIN_WINDOW,
 } from "./channels";
 import { EVENT_CHANGE_ICON } from "./events";
+
+interface StateCollection {
+  subscribe(onUpdate: (state: TaskerState) => void): void;
+}
 
 interface TaskCollection {
   createOne(task: Task): Promise<Task>;
@@ -21,6 +27,7 @@ interface TaskerAPI {
   togglePinWindow(): void;
   changeIcon(): void;
 
+  state: StateCollection;
   task: TaskCollection;
 }
 
@@ -36,6 +43,19 @@ contextBridge.exposeInMainWorld("tasker", {
   },
   changeIcon() {
     ipcRenderer.send(EVENT_CHANGE_ICON);
+  },
+
+  state: {
+    subscribe(onUpdate) {
+      ipcRenderer.send(CHANNEL_SYNC_STATE);
+
+      ipcRenderer.on(
+        CHANNEL_SYNC_STATE,
+        function stateSync(_event, state: TaskerState) {
+          onUpdate(state);
+        },
+      );
+    },
   },
 
   task: {
