@@ -8,10 +8,10 @@ import { useState } from "react";
 import { type TaskItem } from "../../../../../models/tasks";
 import { type Menu, type MenuProps } from "../../../common/menu/menu";
 import { ToggleButton } from "../../../common/toggle-button/toggle-button";
-import { Typography } from "../../../common/typography/typography";
-import { StandardTaskListItemEditActions } from "./actions/standard-task-list-item-edit-actions";
-import { StandardTaskListItemReadOnlyActions } from "./actions/standard-task-list-item-read-only-actions";
-import { StandardTaskListItemContent } from "./content/standard-task-list-item-content";
+import { TaskListItemEditActions } from "./actions/task-list-item-edit-actions";
+import { TaskListItemReadOnlyActions } from "./actions/task-list-item-read-only-actions";
+import { TaskListItemContent } from "./content/task-list-item-content";
+import { TaskListItemTime } from "./content/task-list-item-time";
 import styles from "./standard-task-list-item.module.scss";
 
 export type StandardTaskListItemProps = {
@@ -42,19 +42,13 @@ export function StandardTaskListItem({
         {isLocked ? <IconLock /> : <IconLockOpen />}
       </ToggleButton>
       <span className={styles["task-list-item__icon"]}>{icon}</span>
-      <StandardTaskListItemContent
-        uuid={uuid}
-        isLocked={isLocked}
-        text={task.label}
-      />
+      <TaskListItemContent uuid={uuid} isLocked={isLocked} text={task.label} />
       {!isLocked ? (
-        <StandardTaskListItemEditActions uuid={uuid} task={task} menu={menu} />
+        <TaskListItemEditActions uuid={uuid} task={task} menu={menu} />
       ) : (
-        <StandardTaskListItemReadOnlyActions uuid={uuid} task={task} />
+        <TaskListItemReadOnlyActions uuid={uuid} task={task} />
       )}
-      <Typography variant="body1" className="font-sans">
-        00.00
-      </Typography>
+      <TaskListItemTime task={task} />
     </li>
   );
 }

@@ -8,6 +8,7 @@ export function CreateTimerTaskButton() {
       type: "timer",
       label: "New Timer",
       state: "idle",
+      time: 0,
       actions: [],
     });
   }

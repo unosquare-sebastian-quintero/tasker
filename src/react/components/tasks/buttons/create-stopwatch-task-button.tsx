@@ -8,6 +8,7 @@ export function CreateStopwatchTaskButton() {
       type: "stopwatch",
       label: "New Stopwatch",
       state: "idle",
+      time: 0,
       actions: [],
     });
   }

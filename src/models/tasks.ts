@@ -9,7 +9,6 @@ export type TaskItem = {
   type: TaskType;
   label: string;
   time: number;
-  initialTime: number;
   state: "idle" | "running" | "paused" | "stopped" | "finished";
   actions: TaskAction[];
 };
