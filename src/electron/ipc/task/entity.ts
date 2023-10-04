@@ -1,7 +1,7 @@
 import { ipcRenderer } from "electron";
 import { type TaskItem, type TaskList } from "../../../models/tasks";
-import { CHANNEL_MUTATE_TASK, CHANNEL_QUERY_TASK } from "../../channels";
-import { type TaskMutation } from "../../ipc/task/handlers";
+import { CHANNEL_MUTATE_TASK, CHANNEL_QUERY_TASK } from "./channels";
+import { type TaskMutation } from "./handlers";
 
 export interface TaskEntity {
   createOne(uuid: string, task: TaskItem): Promise<TaskItem>;

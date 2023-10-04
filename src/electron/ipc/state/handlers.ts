@@ -1,6 +1,6 @@
 import { ipcMain } from "electron";
 import { taskerStore } from "../../../state";
-import { CHANNEL_SYNC_STATE } from "../../channels";
+import { CHANNEL_SYNC_STATE } from "./channels";
 
 export function registerStateHandlers() {
   const frames = new Map<number, () => void>();

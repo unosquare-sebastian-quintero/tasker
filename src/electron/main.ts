@@ -3,7 +3,7 @@ import { app, BrowserWindow, ipcMain, Tray } from "electron";
 import ElectronPositioner from "electron-positioner";
 import { taskerStore } from "../state";
 import { EVENT_CHANGE_ICON } from "./events";
-import { registerIpcHandlers } from "./ipc";
+import { registerIpcHandlers } from "./ipc/main";
 import { taskerAction } from "./state";
 
 function isDev() {

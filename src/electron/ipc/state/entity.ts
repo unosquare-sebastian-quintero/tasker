@@ -1,6 +1,6 @@
 import { ipcRenderer } from "electron";
 import { type TaskerState } from "../../../state/types";
-import { CHANNEL_SYNC_STATE } from "../../channels";
+import { CHANNEL_SYNC_STATE } from "./channels";
 
 export interface StateEntity {
   subscribe(onUpdate: (state: TaskerState) => void): void;

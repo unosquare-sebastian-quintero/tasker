@@ -1,10 +1,7 @@
 import { ipcMain } from "electron";
 import { produce } from "immer";
 import { taskerStore } from "../../../state";
-import {
-  CHANNEL_CLOSE_WINDOW,
-  CHANNEL_TOGGLE_PIN_WINDOW,
-} from "../../channels";
+import { CHANNEL_CLOSE_WINDOW, CHANNEL_TOGGLE_PIN_WINDOW } from "./channels";
 
 export function registerAppHandlers() {
   ipcMain.on(CHANNEL_TOGGLE_PIN_WINDOW, function windowPinToggle() {

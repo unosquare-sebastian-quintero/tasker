@@ -1,5 +1,5 @@
 import { ipcRenderer } from "electron";
-import { CHANNEL_TOGGLE_PIN_WINDOW } from "../../channels";
+import { CHANNEL_TOGGLE_PIN_WINDOW } from "./channels";
 
 export interface AppEntity {
   togglePinWindow(): void;

@@ -2,7 +2,7 @@ import { ipcMain } from "electron";
 import { produce } from "immer";
 import { type TaskItem } from "../../../models/tasks";
 import { taskerStore } from "../../../state";
-import { CHANNEL_MUTATE_TASK, CHANNEL_QUERY_TASK } from "../../channels";
+import { CHANNEL_MUTATE_TASK, CHANNEL_QUERY_TASK } from "./channels";
 
 export type TaskQuery = {
   uuid?: string;
