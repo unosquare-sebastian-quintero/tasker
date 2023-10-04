@@ -12,9 +12,10 @@
   &:last-child {
     border-bottom: $border-secondary;
   }
-  &__icon {
-    padding: 0.25rem;
+  &__container {
     display: flex;
     align-items: center;
+    gap: 0.25rem;
+    box-sizing: border-box;
   }
 }

@@ -24,13 +24,15 @@ export type TaskListItemPlayPauseButtonProps = {
 };
 
 export function TaskListItemPlayPauseButton({
-  //   uuid,
+  uuid,
   task,
 }: TaskListItemPlayPauseButtonProps) {
   const icon = STATE_ICON_MAP[task.state];
 
-  function handlePlayPauseButtonClick() {}
-  
+  function handlePlayPauseButtonClick() {
+    console.log(uuid);
+  }
+
   if (icon == null) {
     return null;
   }

@@ -4,29 +4,52 @@ import {
   type Icon,
   type TablerIconsProps,
 } from "@tabler/icons-react";
-import { useState } from "react";
+import { Children, isValidElement, useState } from "react";
 import { type TaskItem } from "../../../../../models/tasks";
-import { type Menu, type MenuProps } from "../../../common/menu/menu";
 import { ToggleButton } from "../../../common/toggle-button/toggle-button";
-import { TaskListItemEditActions } from "./actions/task-list-item-edit-actions";
-import { TaskListItemReadOnlyActions } from "./actions/task-list-item-read-only-actions";
+import { TaskListItemDeleteButton } from "./actions/task-list-item-delete-button";
 import { TaskListItemContent } from "./content/task-list-item-content";
+import { TaskListItemEditPlaceholder } from "./content/task-list-item-edit-placeholder";
+import { TaskListItemReadOnlyPlaceholder } from "./content/task-list-item-read-only-placeholder";
 import { TaskListItemTime } from "./content/task-list-item-time";
 import styles from "./standard-task-list-item.module.scss";
 
-export type StandardTaskListItemProps = {
+function getEditActions(children: React.ReactNode) {
+  return Children.map(children, (child) => {
+    if (isValidElement(child) && child.type === TaskListItemEditPlaceholder) {
+      return child;
+    }
+    return null;
+  });
+}
+
+function getReadOnlyActions(children: React.ReactNode) {
+  return Children.map(children, (child) => {
+    if (
+      isValidElement(child) &&
+      child.type === TaskListItemReadOnlyPlaceholder
+    ) {
+      return child;
+    }
+    return null;
+  });
+}
+
+export type StandardTaskListItemProps = React.PropsWithChildren & {
   uuid: string;
   task: TaskItem;
   icon?: React.ReactElement<TablerIconsProps, Icon>;
-  menu?: React.ReactElement<MenuProps, typeof Menu>;
 };
 
 export function StandardTaskListItem({
   uuid,
   task,
   icon,
-  menu,
+  children,
 }: StandardTaskListItemProps) {
+  const readOnlyActions = getReadOnlyActions(children);
+  const editActions = getEditActions(children);
+
   const [isLocked, setIsLocked] = useState(false);
 
   function handleLockToggleButton(pressed: boolean) {
@@ -41,14 +64,19 @@ export function StandardTaskListItem({
       >
         {isLocked ? <IconLock /> : <IconLockOpen />}
       </ToggleButton>
-      <span className={styles["task-list-item__icon"]}>{icon}</span>
+      <span className={styles["task-list-item__container"]}>{icon}</span>
       <TaskListItemContent uuid={uuid} isLocked={isLocked} text={task.label} />
-      {!isLocked ? (
-        <TaskListItemEditActions uuid={uuid} task={task} menu={menu} />
-      ) : (
-        <TaskListItemReadOnlyActions uuid={uuid} task={task} />
-      )}
-      <TaskListItemTime task={task} />
+      <div className={styles["task-list-item__container"]}>
+        {isLocked ? (
+          readOnlyActions
+        ) : (
+          <>
+            {editActions}
+            <TaskListItemDeleteButton uuid={uuid} task={task} />
+          </>
+        )}
+        <TaskListItemTime task={task} />
+      </div>
     </li>
   );
 }
