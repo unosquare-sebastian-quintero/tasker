@@ -1,9 +1,10 @@
 import { ipcRenderer } from "electron";
 import { type TaskItem, type TaskList } from "../../../models/tasks";
 import { CHANNEL_MUTATE_TASK, CHANNEL_QUERY_TASK } from "../../channels";
+import { type TaskMutation } from "../../ipc/task/handlers";
 
 export interface TaskEntity {
-  createOne(task: TaskItem): Promise<TaskItem>;
+  createOne(uuid: string, task: TaskItem): Promise<TaskItem>;
 
   readMany(): Promise<TaskList>;
 
@@ -14,10 +15,11 @@ export interface TaskEntity {
 
 export function createTaskEntity() {
   return {
-    createOne(task) {
+    createOne(uuid, task) {
       return ipcRenderer.invoke(CHANNEL_MUTATE_TASK, {
-        create: task,
-      });
+        command: "create",
+        payload: { uuid, ...task },
+      } satisfies TaskMutation);
     },
 
     readMany() {
@@ -26,14 +28,16 @@ export function createTaskEntity() {
 
     updateOne(uuid, task) {
       return ipcRenderer.invoke(CHANNEL_MUTATE_TASK, {
-        update: { uuid, ...task },
-      });
+        command: "update",
+        payload: { uuid, ...task },
+      } satisfies TaskMutation);
     },
 
     deleteOne(uuid) {
       return ipcRenderer.invoke(CHANNEL_MUTATE_TASK, {
-        delete: { uuid },
-      });
+        command: "delete",
+        payload: { uuid },
+      } satisfies TaskMutation);
     },
   } satisfies TaskEntity;
 }

@@ -48,6 +48,7 @@ function createRichContextualMenuWindow(trayBounds: Electron.Rectangle) {
     }
 
     window.hide();
+    // window.close();
     taskerAction.app.closeWindow();
   });
 

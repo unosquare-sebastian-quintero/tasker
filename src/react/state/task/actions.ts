@@ -3,40 +3,27 @@ import { v4 } from "uuid";
 import { type TaskAction, type TaskItem } from "../../../models/tasks";
 import { taskerStore } from "../../../state";
 
-export function addTask(task: TaskItem) {
+export async function addTask(task: TaskItem) {
   console.log("[state] addTask", task);
   const uuid = v4();
-  taskerStore.setState((state) =>
-    produce(state, (draft) => {
-      draft.task.items[uuid] = task;
-    }),
-  );
-  return uuid;
+  return window.tasker.task.createOne(uuid, task);
 }
 
-export function updateTask(uuid: string, task: Partial<TaskItem>) {
+export async function updateTask(uuid: string, task: Partial<TaskItem>) {
   console.log("[state] updateTask", uuid, task);
   if (taskerStore.getState().task.items[uuid] == null) {
     return;
   }
 
-  taskerStore.setState((state) =>
-    produce(state, (draft) => {
-      draft.task.items[uuid] = { ...draft.task.items[uuid], ...task };
-    }),
-  );
+  return window.tasker.task.updateOne(uuid, task);
 }
 
-export function removeTask(uuid: string) {
+export async function removeTask(uuid: string) {
   console.log("[state] removeTask", uuid);
-  taskerStore.setState((state) =>
-    produce(state, (draft) => {
-      delete draft.task.items[uuid];
-    }),
-  );
+  return window.tasker.task.deleteOne(uuid);
 }
 
-export function pushTaskAction(uuid: string, action: TaskAction) {
+export async function pushTaskAction(uuid: string, action: TaskAction) {
   taskerStore.setState((state) =>
     produce(state, (draft) => {
       draft.task.items[uuid].actions.push(action);
