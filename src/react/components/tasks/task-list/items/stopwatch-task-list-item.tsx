@@ -1,6 +1,7 @@
+import { IconClockFilled } from "@tabler/icons-react";
 import {
   StandardTaskListItem,
-  StandardTaskListItemProps,
+  type StandardTaskListItemProps,
 } from "./standard-task-list-item";
 
 export type StopwatchTaskListItemProps = StandardTaskListItemProps;
@@ -8,5 +9,5 @@ export type StopwatchTaskListItemProps = StandardTaskListItemProps;
 export function StopwatchTaskListItem({
   ...props
 }: StopwatchTaskListItemProps) {
-  return <StandardTaskListItem {...props} />;
+  return <StandardTaskListItem {...props} icon={<IconClockFilled />} />;
 }

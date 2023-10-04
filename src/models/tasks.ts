@@ -1,4 +1,4 @@
-export type TaskType = "stopwatch";
+export type TaskType = "stopwatch" | "timer";
 
 export type TaskAction = {
   type: string;
