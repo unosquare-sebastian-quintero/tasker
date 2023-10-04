@@ -5,9 +5,9 @@ export function useControlledInterval(
   ms: number,
   deps?: React.DependencyList,
 ) {
-  var idRef = useRef<ReturnType<typeof setInterval>>();
+  const idRef = useRef<ReturnType<typeof setInterval>>();
 
-  var callbackRef = useRef(callback);
+  const callbackRef = useRef(callback);
   callbackRef.current = callback;
 
   useEffect(() => {

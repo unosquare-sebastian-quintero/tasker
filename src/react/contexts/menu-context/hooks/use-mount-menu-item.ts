@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { MenuAction, MenuItemRole } from "../state";
+import { type MenuAction, type MenuItemRole } from "../state";
 import { useMenuItemCountContext } from "./use-menu-item-count-context";
 
 export function useMountMenuItem(dispatch: React.Dispatch<MenuAction>) {

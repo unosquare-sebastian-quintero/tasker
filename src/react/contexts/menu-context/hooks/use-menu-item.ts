@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { MenuItem, MenuItemRole } from "../state";
+import { type MenuItem, type MenuItemRole } from "../state";
 import { useCheckRadioItem } from "./use-check-radio-item";
 import { useCloseMenu } from "./use-close-menu";
 import { useFocusNextItem } from "./use-focus-next-item";

@@ -1,6 +1,6 @@
 import { produce } from "immer";
 import { v4 } from "uuid";
-import { TaskItem, TaskAction } from "../../../models/tasks";
+import { type TaskAction, type TaskItem } from "../../../models/tasks";
 import { taskerStore } from "../../../state";
 
 export function addTask(task: TaskItem) {

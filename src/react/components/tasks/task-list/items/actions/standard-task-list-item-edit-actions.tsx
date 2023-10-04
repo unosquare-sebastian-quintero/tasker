@@ -1,9 +1,9 @@
 import { IconArrowsShuffle, IconTrash } from "@tabler/icons-react";
-import { TaskItem } from "../../../../../../models/tasks";
+import { type TaskItem } from "../../../../../../models/tasks";
 import { taskerAction } from "../../../../../state";
 import { IconButton } from "../../../../common/icon-button/icon-button";
 import { MenuButton } from "../../../../common/menu-button/menu-button";
-import { Menu, MenuProps } from "../../../../common/menu/menu";
+import { type Menu, type MenuProps } from "../../../../common/menu/menu";
 
 export type StandardTaskListItemEditActionsProps = {
   uuid: string;

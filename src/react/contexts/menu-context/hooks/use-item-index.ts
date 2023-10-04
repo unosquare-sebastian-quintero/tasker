@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { MenuAction, MenuItemRole } from "../state";
+import { type MenuAction, type MenuItemRole } from "../state";
 import { useMountMenuItem } from "./use-mount-menu-item";
 
 export function useItemIndex(

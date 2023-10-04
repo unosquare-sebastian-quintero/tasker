@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { MenuAction, MenuState } from "./state";
+import { type MenuAction, type MenuState } from "./state";
 
 export type MenuItemCountContext = React.MutableRefObject<number>;
 

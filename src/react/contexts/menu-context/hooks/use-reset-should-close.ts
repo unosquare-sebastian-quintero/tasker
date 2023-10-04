@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { MenuAction } from "../state";
+import { type MenuAction } from "../state";
 
 export function useResetShouldClose(dispatch: React.Dispatch<MenuAction>) {
   return useCallback(

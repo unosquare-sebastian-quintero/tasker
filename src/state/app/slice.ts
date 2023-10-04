@@ -1,6 +1,6 @@
-import { StateCreator } from "zustand";
-import { TaskerState } from "../types";
-import { AppSlice } from "./types";
+import { type StateCreator } from "zustand";
+import { type TaskerState } from "../types";
+import { type AppSlice } from "./types";
 
 export const createAppSlice: StateCreator<
   TaskerState,

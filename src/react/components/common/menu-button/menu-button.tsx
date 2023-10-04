@@ -1,8 +1,8 @@
 import clsx from "clsx";
 import { cloneElement, useState } from "react";
-import { BaseButtonProps } from "../base-button/base-button";
+import { type BaseButtonProps } from "../base-button/base-button";
 import { Dialog } from "../dialog/dialog";
-import { Menu, MenuProps } from "../menu/menu";
+import { type Menu, type MenuProps } from "../menu/menu";
 
 export type MenuButtonProps<TProps extends BaseButtonProps = BaseButtonProps> =
   TProps & {

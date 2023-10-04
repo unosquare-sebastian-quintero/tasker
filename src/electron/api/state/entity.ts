@@ -1,5 +1,5 @@
 import { ipcRenderer } from "electron";
-import { TaskerState } from "../../../state/types";
+import { type TaskerState } from "../../../state/types";
 import { CHANNEL_SYNC_STATE } from "../../channels";
 
 export interface StateEntity {

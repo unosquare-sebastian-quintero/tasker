@@ -1,6 +1,6 @@
-import { Icon, TablerIconsProps } from "@tabler/icons-react";
+import { type Icon, type TablerIconsProps } from "@tabler/icons-react";
 import clsx from "clsx";
-import { BaseButton, BaseButtonProps } from "../base-button/base-button";
+import { BaseButton, type BaseButtonProps } from "../base-button/base-button";
 import styles from "./icon-button.module.scss";
 
 export type IconButtonProps = Omit<BaseButtonProps, "children"> & {

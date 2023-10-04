@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { type Meta, type StoryObj } from "@storybook/react";
 import { IconHourglassFilled, IconShieldLockFilled } from "@tabler/icons-react";
 import { ToggleButton } from "./toggle-button";
 

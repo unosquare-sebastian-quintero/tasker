@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { useEffect } from "react";
 import { useMenu, withMenuProvider } from "../../../contexts/menu-context";
-import { MenuItem, MenuItemProps } from "../menu-item/menu-item";
+import { type MenuItem, type MenuItemProps } from "../menu-item/menu-item";
 import styles from "./menu.module.scss";
 
 type MenuItemElement = React.ReactElement<MenuItemProps, typeof MenuItem>;

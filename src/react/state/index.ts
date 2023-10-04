@@ -1,6 +1,6 @@
 import { useStore } from "zustand";
 import { taskerStore } from "../../state";
-import { TaskerState } from "../../state/types";
+import { type TaskerState } from "../../state/types";
 import * as app from "./app/actions";
 import * as task from "./task/actions";
 

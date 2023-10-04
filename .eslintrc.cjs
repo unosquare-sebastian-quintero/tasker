@@ -9,11 +9,26 @@ module.exports = {
     "plugin:storybook/recommended",
     "prettier",
   ],
-  ignorePatterns: ["dist", ".eslintrc.cjs"],
+  ignorePatterns: [
+    "node_modules",
+    "dist",
+    "dist-electron",
+    ".eslintrc.cjs",
+    ".prettierrc",
+    "vite.config.ts",
+    "vitest.config.ts",
+  ],
   parser: "@typescript-eslint/parser",
+  parserOptions: {
+    parser: "@typescript-eslint/parser",
+    project: "./tsconfig.json",
+  },
   plugins: ["@typescript-eslint", "react", "react-refresh"],
   rules: {
-    "@typescript-eslint/consistent-type-imports": "error",
+    "@typescript-eslint/consistent-type-imports": [
+      "error",
+      { fixStyle: "inline-type-imports" },
+    ],
     "@typescript-eslint/consistent-type-exports": "error",
     "react/react-in-jsx-scope": "off",
     "react-refresh/only-export-components": [

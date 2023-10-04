@@ -28,7 +28,7 @@ export function Backdrop({ onClose, children }: BackdropProps) {
       div.removeEventListener("click", onClick);
       document.body.removeChild(div);
     };
-  }, []);
+  }, [onClose]);
 
   if (container == null) {
     return null;

@@ -1,5 +1,5 @@
 import { ipcMain } from "electron";
-import { TaskItem } from "../../../models/tasks";
+import { type TaskItem } from "../../../models/tasks";
 import { CHANNEL_MUTATE_TASK, CHANNEL_QUERY_TASK } from "../../channels";
 
 export type TaskQuery = {

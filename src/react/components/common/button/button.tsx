@@ -1,6 +1,6 @@
-import { Icon } from "@tabler/icons-react";
+import { type Icon } from "@tabler/icons-react";
 import clsx from "clsx";
-import { BaseButton, BaseButtonProps } from "../base-button/base-button";
+import { BaseButton, type BaseButtonProps } from "../base-button/base-button";
 import classes from "./button.module.scss";
 
 function renderIcon(IconComponent?: Icon | null) {

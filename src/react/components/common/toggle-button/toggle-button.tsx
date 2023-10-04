@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { useState } from "react";
-import { BaseButton, BaseButtonProps } from "../base-button/base-button";
+import { BaseButton, type BaseButtonProps } from "../base-button/base-button";
 import styles from "./toggle-button.module.scss";
 
 export type ToggleButtonProps = BaseButtonProps & {

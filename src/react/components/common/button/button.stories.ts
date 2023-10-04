@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { type Meta, type StoryObj } from "@storybook/react";
 import { IconAlarmFilled, IconBellFilled } from "@tabler/icons-react";
 import { Button } from "./button";
 

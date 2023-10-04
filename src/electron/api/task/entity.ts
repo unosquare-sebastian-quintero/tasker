@@ -1,5 +1,5 @@
 import { ipcRenderer } from "electron";
-import { TaskItem, TaskList } from "../../../models/tasks";
+import { type TaskItem, type TaskList } from "../../../models/tasks";
 import { CHANNEL_MUTATE_TASK, CHANNEL_QUERY_TASK } from "../../channels";
 
 export interface TaskEntity {
