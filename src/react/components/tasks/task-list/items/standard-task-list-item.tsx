@@ -8,9 +8,10 @@ import { Children, isValidElement, useState } from "react";
 import { type TaskItem } from "../../../../../models/tasks";
 import { ToggleButton } from "../../../common/toggle-button/toggle-button";
 import { TaskListItemDeleteButton } from "./actions/task-list-item-delete-button";
-import { TaskListItemContent } from "./content/task-list-item-content";
 import { TaskListItemEditPlaceholder } from "./content/task-list-item-edit-placeholder";
 import { TaskListItemReadOnlyPlaceholder } from "./content/task-list-item-read-only-placeholder";
+import { TaskListItemSelect } from "./content/task-list-item-select";
+import { TaskListItemTextarea } from "./content/task-list-item-textarea";
 import { TaskListItemTime } from "./content/task-list-item-time";
 import styles from "./standard-task-list-item.module.scss";
 
@@ -64,8 +65,12 @@ export function StandardTaskListItem({
       >
         {isLocked ? <IconLock /> : <IconLockOpen />}
       </ToggleButton>
-      <span className={styles["task-list-item__container"]}>{icon}</span>
-      <TaskListItemContent uuid={uuid} isLocked={isLocked} text={task.label} />
+
+      <div className={styles["task-list-item__container"]}>{icon}</div>
+
+      <TaskListItemTextarea uuid={uuid} isLocked={isLocked} />
+      <TaskListItemSelect uuid={uuid} isLocked={isLocked} />
+
       <div className={styles["task-list-item__container"]}>
         {isLocked ? (
           readOnlyActions

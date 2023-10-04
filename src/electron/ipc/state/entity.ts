@@ -9,10 +9,9 @@ export interface StateEntity {
 export function createStateEntity() {
   return {
     subscribe(onUpdate) {
-      // FIXME: looks like a memory leak
-
       ipcRenderer.send(CHANNEL_SYNC_STATE);
 
+      // FIXME: looks like a memory leak
       ipcRenderer.on(
         CHANNEL_SYNC_STATE,
         function stateSync(_event, state: TaskerState) {

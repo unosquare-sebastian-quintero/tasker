@@ -1,19 +1,19 @@
 import clsx from "clsx";
-import { taskerAction } from "../../../../../state";
+import { taskerAction, useTaskerStore } from "../../../../../state";
 import { Textarea } from "../../../../common/textarea/textarea";
-import styles from "./task-list-item-content.module.scss";
+import styles from "./task-list-item-textarea.module.scss";
 
-export type TaskListItemContentProps = {
+export type TaskListItemTextareaProps = {
   uuid: string;
   isLocked: boolean;
-  text: string;
 };
 
-export function TaskListItemContent({
+export function TaskListItemTextarea({
   uuid,
   isLocked,
-  text,
-}: TaskListItemContentProps) {
+}: TaskListItemTextareaProps) {
+  const text = useTaskerStore((state) => state.task.items[uuid].label);
+
   function handleTextareaChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
     taskerAction.task.updateTask(uuid, {
       label: event.target.value,

@@ -1,0 +1,16 @@
+@import "../../../styles/theme";
+
+.select {
+  border: $border-secondary;
+  border-radius: $border-radius;
+  background-color: $secondary-shade-2;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  &:hover {
+    background-color: $secondary-shade-1;
+  }
+  &:focus {
+    background-color: $secondary;
+  }
+}
