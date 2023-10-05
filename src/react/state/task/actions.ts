@@ -23,6 +23,14 @@ export async function removeTask(uuid: string) {
   return window.tasker.task.deleteOne(uuid);
 }
 
+export async function startTask(uuid: string) {
+  return window.tasker.task.start(uuid);
+}
+
+export async function stopTask(uuid: string) {
+  return window.tasker.task.stop(uuid);
+}
+
 export async function pushTaskAction(uuid: string, action: TaskAction) {
   taskerStore.setState((state) =>
     produce(state, (draft) => {

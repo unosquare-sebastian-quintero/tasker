@@ -1,8 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "vitest-axe";
-import { MenuItem } from "../../../common/menu-item/menu-item";
-import { Menu } from "../../../common/menu/menu";
 import { StandardTaskListItem } from "./standard-task-list-item";
 
 test("lock button switchs between read-only and edit modes", async () => {
@@ -12,14 +10,13 @@ test("lock button switchs between read-only and edit modes", async () => {
     <ul>
       <StandardTaskListItem
         uuid="test"
-        task={{ type: "stopwatch", state: "idle", label: "task", actions: [] }}
-        menu={
-          <Menu>
-            <MenuItem variant="default" value="action-1">
-              Action 1
-            </MenuItem>
-          </Menu>
-        }
+        task={{
+          type: "stopwatch",
+          state: "idle",
+          time: 0,
+          label: "task",
+          actions: [],
+        }}
       />
     </ul>,
   );
@@ -48,14 +45,13 @@ test("show up the custom menu when actions button is clicked and controls menu",
     <ul>
       <StandardTaskListItem
         uuid="test"
-        task={{ type: "stopwatch", state: "idle", label: "task", actions: [] }}
-        menu={
-          <Menu>
-            <MenuItem variant="default" value="action-1">
-              Action 1
-            </MenuItem>
-          </Menu>
-        }
+        task={{
+          type: "stopwatch",
+          state: "idle",
+          time: 0,
+          label: "task",
+          actions: [],
+        }}
       />
     </ul>,
   );
@@ -81,6 +77,7 @@ test("accessibility", async () => {
         task={{
           type: "stopwatch",
           state: "idle",
+          time: 0,
           label: "task",
           actions: [],
         }}

@@ -2,7 +2,7 @@ import { join } from "path";
 import { app, BrowserWindow, ipcMain, Tray } from "electron";
 import ElectronPositioner from "electron-positioner";
 import { taskerStore } from "../state";
-import { EVENT_CHANGE_ICON } from "./events";
+import { CHANNEL_CHANGE_TRAY_ICON } from "./ipc/app/channels";
 import { registerIpcHandlers } from "./ipc/main";
 import { taskerAction } from "./state";
 
@@ -95,7 +95,7 @@ app.whenReady().then(function ready() {
   //   tray.setTitle("90%");
   // }, 2000);
 
-  ipcMain.on(EVENT_CHANGE_ICON, () => {
+  ipcMain.on(CHANNEL_CHANGE_TRAY_ICON, () => {
     iconIndex = (iconIndex + 1) % iconList.length;
     tray.setImage(iconList[iconIndex]);
   });
