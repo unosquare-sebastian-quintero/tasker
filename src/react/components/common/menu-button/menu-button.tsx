@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import { cloneElement, useState } from "react";
 import { type BaseButtonProps } from "../base-button/base-button";
 import { Dialog } from "../dialog/dialog";
@@ -7,15 +6,16 @@ import { type Menu, type MenuProps } from "../menu/menu";
 export type MenuButtonProps<TProps extends BaseButtonProps = BaseButtonProps> =
   TProps & {
     dialogTitle: string;
+    keepMounted?: boolean;
     menu: React.ReactElement<MenuProps, typeof Menu>;
     component: React.ComponentType<TProps>;
   };
 
 export function MenuButton<TProps extends BaseButtonProps = BaseButtonProps>({
   dialogTitle,
+  keepMounted,
   menu,
   component: Component,
-  className,
   onClick,
   onKeyUp,
   ...props
@@ -71,15 +71,17 @@ export function MenuButton<TProps extends BaseButtonProps = BaseButtonProps>({
         {...(props as unknown as TProps)}
         aria-haspopup="menu"
         aria-expanded={isMenuOpen}
-        className={clsx(className)}
         onClick={handleButtonClick}
         onKeyUp={handleButtonKeyUp}
       ></Component>
-      {isMenuOpen ? (
-        <Dialog title={dialogTitle} onClose={handleDialogClose}>
-          {menuClone}
-        </Dialog>
-      ) : null}
+      <Dialog
+        open={isMenuOpen}
+        keepMounted={keepMounted}
+        title={dialogTitle}
+        onClose={handleDialogClose}
+      >
+        {menuClone}
+      </Dialog>
     </>
   );
 }

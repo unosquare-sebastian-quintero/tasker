@@ -20,5 +20,8 @@
       z-index: $layer-2;
       transform: translateY(0);
     }
+    &.task-list-item__textarea--finished {
+      text-decoration: line-through;
+    }
   }
 }

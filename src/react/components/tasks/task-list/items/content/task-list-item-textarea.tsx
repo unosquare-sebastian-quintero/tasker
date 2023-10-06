@@ -12,6 +12,7 @@ export function TaskListItemTextarea({
   uuid,
   isLocked,
 }: TaskListItemTextareaProps) {
+  const state = useTaskerStore((state) => state.task.items[uuid].state);
   const text = useTaskerStore((state) => state.task.items[uuid].label);
 
   function handleTextareaChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
@@ -31,6 +32,10 @@ export function TaskListItemTextarea({
         className={clsx(
           "font-sans",
           styles["task-list-item-content__textarea"],
+          {
+            [styles["task-list-item__textarea--finished"]]:
+              state === "finished",
+          },
         )}
         value={text}
         onChange={handleTextareaChange}

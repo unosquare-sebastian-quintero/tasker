@@ -36,6 +36,7 @@ export type MenuItemProps = React.HTMLAttributes<HTMLLIElement> & {
     checked: boolean,
     event: React.MouseEvent<HTMLLIElement> | React.KeyboardEvent<HTMLLIElement>,
   ) => void;
+  onOptionSelected?: () => void;
 };
 
 export function MenuItem({
@@ -43,6 +44,7 @@ export function MenuItem({
   value,
   disabled,
   onCheckChange,
+  onOptionSelected,
   className,
   onClick,
   onKeyDown,
@@ -50,6 +52,7 @@ export function MenuItem({
   ...props
 }: MenuItemProps) {
   const role = ROLE_VARIANT_MAP[variant];
+  const isCheckable = role === "menuitemcheckbox" || role === "menuitemradio";
 
   const {
     tabPressed,
@@ -76,16 +79,21 @@ export function MenuItem({
   function toggleChecked(
     event: React.MouseEvent<HTMLLIElement> | React.KeyboardEvent<HTMLLIElement>,
   ) {
-    if (role === "menuitemcheckbox" || role === "menuitemradio") {
+    if (isCheckable) {
       toggleItemChecked();
       onCheckChange?.(!isChecked, event);
     }
   }
 
+  function selectOption() {
+    onOptionSelected?.();
+    selectItem();
+  }
+
   function handleItemClick(event: React.MouseEvent<HTMLLIElement>) {
     onClick?.(event);
     toggleChecked(event);
-    selectItem();
+    selectOption();
   }
 
   function handleItemKeyDown(event: React.KeyboardEvent<HTMLLIElement>) {
@@ -107,7 +115,7 @@ export function MenuItem({
 
     switch (event.key) {
       case "Enter":
-        selectItem();
+        selectOption();
         break;
 
       case " ":
@@ -116,7 +124,7 @@ export function MenuItem({
         } else if (role === "menuitemradio") {
           checkRadioItem();
         } else {
-          selectItem();
+          selectOption();
           closeMenu();
         }
         break;

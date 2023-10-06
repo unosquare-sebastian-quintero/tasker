@@ -1,5 +1,6 @@
 import { IconX } from "@tabler/icons-react";
 import clsx from "clsx";
+import { useLifecycleLog } from "../../../hooks/use-lifecycle-log";
 import { Backdrop } from "../backdrop/backdrop";
 import { IconButton } from "../icon-button/icon-button";
 import { Typography } from "../typography/typography";
@@ -7,23 +8,40 @@ import styles from "./dialog.module.scss";
 
 export type DialogProps = React.HTMLAttributes<HTMLDivElement> &
   React.PropsWithChildren & {
+    open: boolean;
+    keepMounted?: boolean;
     title: string;
     onClose?: () => void;
   };
 
 export function Dialog({
+  open,
+  keepMounted,
   title,
   onClose,
   children,
   className,
   ...props
 }: DialogProps) {
+  useLifecycleLog(
+    Dialog,
+    { open, keepMounted, title, onClose, children, className, ...props },
+    console.log,
+  );
+
   function handleCloseAction() {
     onClose?.();
   }
 
+  if (!keepMounted && !open) {
+    return null;
+  }
+
   return (
-    <Backdrop onClose={handleCloseAction}>
+    <Backdrop
+      className={clsx({ none: keepMounted && !open })}
+      onClose={handleCloseAction}
+    >
       <div
         {...props}
         className={clsx(className, styles.dialog)}

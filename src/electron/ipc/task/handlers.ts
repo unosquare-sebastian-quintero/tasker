@@ -1,5 +1,6 @@
-import { ipcMain } from "electron";
+import { ipcMain, Notification } from "electron";
 import { produce } from "immer";
+import { type TaskItem } from "../../../models/tasks";
 import { taskerStore } from "../../../state";
 import { taskerAction } from "../../state";
 import {
@@ -8,6 +9,24 @@ import {
   CHANNEL_TRIGGER_TASK_COMMAND,
 } from "./channels";
 import { type TaskCommand, type TaskMutation, type TaskQuery } from "./types";
+
+function triggerActions(task: TaskItem) {
+  task.actions.forEach((action) => {
+    switch (action.type) {
+      case "notification":
+        console.log(action);
+        new Notification({
+          title: `Tasker ${task.type}`,
+          body: action.payload.message ?? task.label,
+        }).show();
+        break;
+
+      default:
+        console.error(`Unkown task action ${action}`);
+        break;
+    }
+  });
+}
 
 export function registerTaskHandlers() {
   const taskHandlers = new Map<string, ReturnType<typeof setInterval>>();
@@ -27,8 +46,9 @@ export function registerTaskHandlers() {
   taskerStore.subscribe(function onStateChange(state) {
     const taskIds = taskHandlers.keys();
     for (const uuid of taskIds) {
-      if (state.task.items[uuid].state === "finished") {
-        // TODO: trigger actions
+      const task = state.task.items[uuid];
+      if (task.state === "finished") {
+        triggerActions(task);
         stopTaskClock(uuid);
       }
     }

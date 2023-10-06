@@ -2,6 +2,9 @@
   border: none;
   background-color: transparent;
   box-sizing: border-box;
+  text-align: center;
+  display: flex;
+  justify-content: center;
   &.base-button--full-width {
     width: 100%;
   }

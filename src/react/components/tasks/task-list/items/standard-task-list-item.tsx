@@ -6,8 +6,9 @@ import {
 } from "@tabler/icons-react";
 import { Children, isValidElement, useState } from "react";
 import { type TaskItem } from "../../../../../models/tasks";
+import { useTaskerStore } from "../../../../state";
 import { ToggleButton } from "../../../common/toggle-button/toggle-button";
-import { TaskListItemDeleteButton } from "./actions/task-list-item-delete-button";
+import { TaskListItemDeleteButton } from "./buttons/task-list-item-delete-button";
 import { TaskListItemEditPlaceholder } from "./content/task-list-item-edit-placeholder";
 import { TaskListItemReadOnlyPlaceholder } from "./content/task-list-item-read-only-placeholder";
 import { TaskListItemSelect } from "./content/task-list-item-select";
@@ -51,21 +52,19 @@ export function StandardTaskListItem({
   const readOnlyActions = getReadOnlyActions(children);
   const editActions = getEditActions(children);
 
-  const [isLocked, setIsLocked] = useState(false);
+  const state = useTaskerStore((state) => state.task.items[uuid].state);
+
+  const [isLockedByUser, setIsLockedByUser] = useState(false);
+
+  const hasFinished = state === "finished";
+  const isLocked = isLockedByUser || hasFinished;
 
   function handleLockToggleButton(pressed: boolean) {
-    setIsLocked(pressed);
+    setIsLockedByUser(pressed);
   }
 
   return (
     <li className={styles["task-list-item"]}>
-      <ToggleButton
-        aria-label={`${isLocked ? "Unlock" : "Lock"} "${task.label}"`}
-        onToggle={handleLockToggleButton}
-      >
-        {isLocked ? <IconLock /> : <IconLockOpen />}
-      </ToggleButton>
-
       <div className={styles["task-list-item__container"]}>{icon}</div>
 
       <TaskListItemTextarea uuid={uuid} isLocked={isLocked} />
@@ -73,7 +72,12 @@ export function StandardTaskListItem({
 
       <div className={styles["task-list-item__container"]}>
         {isLocked ? (
-          readOnlyActions
+          <>
+            {readOnlyActions}
+            {hasFinished ? (
+              <TaskListItemDeleteButton uuid={uuid} task={task} />
+            ) : null}
+          </>
         ) : (
           <>
             {editActions}
@@ -82,6 +86,16 @@ export function StandardTaskListItem({
         )}
         <TaskListItemTime task={task} />
       </div>
+
+      <ToggleButton
+        aria-label={`${isLocked ? "Unlock" : "Lock"} "${task.label}"`}
+        aria-disabled={hasFinished}
+        disabled={hasFinished}
+        pressed={hasFinished ? true : undefined}
+        onToggle={handleLockToggleButton}
+      >
+        {isLocked ? <IconLock /> : <IconLockOpen />}
+      </ToggleButton>
     </li>
   );
 }

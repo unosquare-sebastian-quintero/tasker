@@ -3,7 +3,7 @@ import { Children } from "react";
 import { Typography } from "../typography/typography";
 import styles from "./base-button.module.scss";
 
-export type BaseButtonProps = React.HTMLAttributes<HTMLButtonElement> & {
+export type BaseButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   fullWidth?: boolean;
 };
 

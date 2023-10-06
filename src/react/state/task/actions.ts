@@ -1,4 +1,3 @@
-import { produce } from "immer";
 import { v4 } from "uuid";
 import { type TaskAction, type TaskItem } from "../../../models/tasks";
 import { taskerStore } from "../../../state";
@@ -32,9 +31,7 @@ export async function stopTask(uuid: string) {
 }
 
 export async function pushTaskAction(uuid: string, action: TaskAction) {
-  taskerStore.setState((state) =>
-    produce(state, (draft) => {
-      draft.task.items[uuid].actions.push(action);
-    }),
-  );
+  return window.tasker.task.updateOne(uuid, {
+    actions: [action],
+  });
 }

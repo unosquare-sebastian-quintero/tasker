@@ -5,6 +5,7 @@ import styles from "./toggle-button.module.scss";
 
 export type ToggleButtonProps = BaseButtonProps & {
   defaultPressed?: boolean;
+  pressed?: boolean;
   onToggle?: (
     pressed: boolean,
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -13,12 +14,15 @@ export type ToggleButtonProps = BaseButtonProps & {
 
 export function ToggleButton({
   defaultPressed,
+  pressed,
   onToggle,
   className,
   onClick,
   ...props
 }: ToggleButtonProps) {
-  const [isPressed, setIsPressed] = useState(defaultPressed);
+  const [isPressedInternal, setIsPressedInternal] = useState(defaultPressed);
+
+  const isPressed = pressed != null ? pressed : isPressedInternal;
 
   function handleButtonClick(
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -26,7 +30,7 @@ export function ToggleButton({
     onClick?.(event);
 
     onToggle?.(!isPressed, event);
-    setIsPressed((pressed) => {
+    setIsPressedInternal((pressed) => {
       return !pressed;
     });
   }

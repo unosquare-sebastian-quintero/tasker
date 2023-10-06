@@ -1,6 +1,7 @@
 @import "../../../styles/theme";
 
 .select {
+  box-sizing: border-box;
   border: $border-secondary;
   border-radius: $border-radius;
   background-color: $secondary-shade-2;

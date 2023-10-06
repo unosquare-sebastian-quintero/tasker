@@ -1,12 +1,13 @@
 import clsx from "clsx";
 import classes from "./typography.module.scss";
 
-type Variant = "h1" | "h2" | "body1" | "button" | "default";
+type Variant = "h1" | "h2" | "body1" | "body2" | "button" | "default";
 
 const COMPONENT_VARIANT_MAP: Record<Variant, React.ElementType> = {
   h1: "h1",
   h2: "h2",
   body1: "span",
+  body2: "span",
   button: "span",
   default: "span",
 };
