@@ -42,6 +42,16 @@ function createRichContextualMenuWindow(trayBounds: Electron.Rectangle) {
     taskerAction.app.openWindow();
   });
 
+  const unsubscribe = taskerStore.subscribe((state) => {
+    if (!state.app.window.isOpen) {
+      window.hide();
+    }
+  });
+
+  window.addListener("close", () => {
+    unsubscribe();
+  });
+
   window.addListener("blur", () => {
     if (taskerStore.getState().app.window.isPinned) {
       return;
@@ -104,6 +114,8 @@ app.whenReady().then(function ready() {
     if (taskerStore.getState().app.window.isOpen) {
       return;
     }
+
+    taskerAction.app.openWindow();
 
     if (window != null) {
       window.show();

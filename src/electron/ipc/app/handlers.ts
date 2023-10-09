@@ -13,6 +13,10 @@ export function registerAppHandlers() {
   });
 
   ipcMain.on(CHANNEL_CLOSE_WINDOW, function windowClose() {
-    // TODO: state close window
+    taskerStore.setState((state) =>
+      produce(state, (draft) => {
+        draft.app.window.isOpen = false;
+      }),
+    );
   });
 }

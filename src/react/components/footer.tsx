@@ -1,9 +1,10 @@
+import { taskerAction } from "../state";
 import { BaseButton } from "./common/base-button/base-button";
 import styles from "./footer.module.scss";
 
 export function Footer() {
   function handleButtonClick() {
-    // TODO: Close
+    taskerAction.app.closeWindow();
   }
 
   return (
