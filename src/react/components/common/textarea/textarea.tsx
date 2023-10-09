@@ -3,10 +3,7 @@ import { useRef, useState } from "react";
 import { getClientScrollFactor } from "../../../utilities/dom-utils";
 import styles from "./textarea.module.scss";
 
-export type TextareaProps =
-  React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
-    readOnly: boolean;
-  };
+export type TextareaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement>;
 
 export function Textarea({
   readOnly,
@@ -36,7 +33,6 @@ export function Textarea({
       {...props}
       ref={textareaRef}
       rows={rows}
-      readOnly={readOnly}
       className={clsx(className, styles.textarea, {
         [styles["textarea--read-only"]]: readOnly,
       })}

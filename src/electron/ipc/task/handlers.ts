@@ -1,3 +1,4 @@
+import { exec } from "child_process";
 import { ipcMain, Notification } from "electron";
 import { produce } from "immer";
 import { type TaskItem } from "../../../models/tasks";
@@ -14,15 +15,18 @@ function triggerActions(task: TaskItem) {
   task.actions.forEach((action) => {
     switch (action.type) {
       case "notification":
-        console.log(action);
         new Notification({
           title: `Tasker ${task.type}`,
           body: action.payload.message ?? task.label,
         }).show();
         break;
 
+      case "command":
+        exec(action.payload.cmd);
+        break;
+
       default:
-        console.error(`Unkown task action ${action}`);
+        console.error("Unkown task action ", action);
         break;
     }
   });

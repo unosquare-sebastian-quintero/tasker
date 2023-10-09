@@ -3,13 +3,9 @@ import { Select } from "../../../../common/select/select";
 
 export type TaskListItemSelectProps = {
   uuid: string;
-  isLocked: boolean;
 };
 
-export function TaskListItemSelect({
-  uuid,
-  isLocked,
-}: TaskListItemSelectProps) {
+export function TaskListItemSelect({ uuid }: TaskListItemSelectProps) {
   const time = useTaskerStore((state) => state.task.items[uuid].time);
   const value = time.toString();
 
@@ -19,10 +15,6 @@ export function TaskListItemSelect({
     taskerAction.task.updateTask(uuid, {
       time: newTime,
     });
-  }
-
-  if (isLocked) {
-    return null;
   }
 
   return (

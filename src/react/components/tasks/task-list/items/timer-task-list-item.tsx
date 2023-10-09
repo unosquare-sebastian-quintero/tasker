@@ -2,8 +2,8 @@ import { IconBellFilled } from "@tabler/icons-react";
 import { Menu } from "../../../common/menu/menu";
 import { TaskListItemPlayPauseButton } from "./buttons/task-list-item-play-pause-button";
 import { TaskListItemTriggerButton } from "./buttons/task-list-item-trigger-button";
-import { TaskListItemEditPlaceholder } from "./content/task-list-item-edit-placeholder";
-import { TaskListItemReadOnlyPlaceholder } from "./content/task-list-item-read-only-placeholder";
+import { TaskListItemSelect } from "./content/task-list-item-select";
+import { TaskListItemCommandMenuItem } from "./menu-items/task-list-item-command-menu-item";
 import { TaskListItemReminderMenuItem } from "./menu-items/task-list-item-reminder-menu-item";
 import {
   StandardTaskListItem,
@@ -14,22 +14,25 @@ export type TimerTaskListItemProps = StandardTaskListItemProps;
 
 export function TimerTaskListItem(props: TimerTaskListItemProps) {
   return (
-    <StandardTaskListItem {...props} icon={<IconBellFilled />}>
-      <TaskListItemEditPlaceholder>
+    <StandardTaskListItem
+      {...props}
+      icon={<IconBellFilled />}
+      editInputs={<TaskListItemSelect uuid={props.uuid} />}
+      editActions={
         <TaskListItemTriggerButton
           uuid={props.uuid}
           task={props.task}
           menu={
             <Menu>
               <TaskListItemReminderMenuItem uuid={props.uuid} />
+              <TaskListItemCommandMenuItem uuid={props.uuid} />
             </Menu>
           }
         />
-      </TaskListItemEditPlaceholder>
-
-      <TaskListItemReadOnlyPlaceholder>
+      }
+      readOnlyActions={
         <TaskListItemPlayPauseButton uuid={props.uuid} task={props.task} />
-      </TaskListItemReadOnlyPlaceholder>
-    </StandardTaskListItem>
+      }
+    />
   );
 }

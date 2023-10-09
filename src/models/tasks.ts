@@ -1,10 +1,8 @@
 export type TaskType = "stopwatch" | "timer";
 
-export type TaskAction = {
-  type: "notification";
-  payload: { message?: string };
-};
-// | { type: string; payload: unknown };
+export type TaskAction =
+  | { type: "notification"; payload: { message?: string } }
+  | { type: "command"; payload: { cmd: string; args?: string[] } };
 
 export type TaskItem = {
   type: TaskType;
