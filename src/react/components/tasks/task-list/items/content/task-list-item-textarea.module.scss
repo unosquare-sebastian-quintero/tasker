@@ -17,7 +17,7 @@
     &:focus {
       top: 0;
       box-shadow: $shadow;
-      z-index: $layer-2;
+      z-index: $layer-1;
       transform: translateY(0);
     }
     &.task-list-item__textarea--finished {

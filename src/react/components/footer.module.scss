@@ -1,6 +1,7 @@
 @import "../styles/theme";
 
 .footer {
+  box-sizing: border-box;
   border-top: $border-secondary;
   &__button {
     &:hover {

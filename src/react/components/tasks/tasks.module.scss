@@ -10,6 +10,7 @@
     justify-content: space-evenly;
     flex-wrap: nowrap;
     gap: 0.5rem;
+    z-index: $layer-2;
     @extend %glassmorphism;
   }
 }
