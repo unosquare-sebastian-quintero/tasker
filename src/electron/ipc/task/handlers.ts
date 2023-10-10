@@ -1,5 +1,5 @@
 import { exec } from "child_process";
-import { ipcMain, Notification } from "electron";
+import { ipcMain, Notification, shell } from "electron";
 import { produce } from "immer";
 import { type TaskItem } from "../../../models/tasks";
 import { taskerStore } from "../../../state";
@@ -23,6 +23,17 @@ function triggerActions(task: TaskItem) {
 
       case "command":
         exec(action.payload.cmd);
+        break;
+
+      case "mail":
+        shell.openExternal(
+          `mailto:?${Object.entries(action.payload)
+            .reduce((components: string[], [key, value]) => {
+              components.push(`${key}=${encodeURIComponent(value)}`);
+              return components;
+            }, [])
+            .join("&")}`,
+        );
         break;
 
       default:

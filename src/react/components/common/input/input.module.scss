@@ -1,0 +1,24 @@
+@import "../../../styles/theme";
+
+.input {
+  box-sizing: border-box;
+  padding: 0.25rem;
+  width: 100%;
+  border: $border-secondary;
+  border-radius: $border-radius;
+  background-color: $secondary-shade-2;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  &:hover {
+    background-color: $secondary-shade-1;
+  }
+  &:focus {
+    background-color: $secondary;
+    white-space: pre-line;
+  }
+  &--read-only {
+    background-color: $secondary;
+    border: none;
+  }
+}

@@ -50,9 +50,24 @@ export function Backdrop({ className, onClose, children }: BackdropProps) {
     container.className = clsx(className, styles.backdrop);
   }, [className, container]);
 
+  function handleClick(event: React.MouseEvent<HTMLDivElement>) {
+    if (event.currentTarget === event.target) {
+      onClose?.();
+    }
+  }
+
   if (container == null) {
     return null;
   }
 
-  return <>{createPortal(children, container)}</>;
+  return (
+    <>
+      {createPortal(
+        <div className={styles.content} onClick={handleClick}>
+          {children}
+        </div>,
+        container,
+      )}
+    </>
+  );
 }
