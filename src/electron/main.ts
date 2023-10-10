@@ -1,8 +1,8 @@
 import { join } from "path";
-import { app, BrowserWindow, ipcMain, Tray } from "electron";
+import { app, BrowserWindow, Tray } from "electron";
 import ElectronPositioner from "electron-positioner";
+import { shallow } from "zustand/shallow";
 import { taskerStore } from "../state";
-import { CHANNEL_CHANGE_TRAY_ICON } from "./ipc/app/channels";
 import { registerIpcHandlers } from "./ipc/main";
 import { taskerAction } from "./state";
 
@@ -87,27 +87,29 @@ app.whenReady().then(function ready() {
 
   registerIpcHandlers();
 
-  let iconIndex = 0;
-  const iconList = [
-    join(__dirname, "checklistTemplate.png"),
-    join(__dirname, "clockTemplate.png"),
-  ];
-
-  const tray = new Tray(iconList[iconIndex]);
+  const tray = new Tray(join(__dirname, "checklistTemplate.png"));
   let window: BrowserWindow | null = null;
 
   tray.setToolTip("Create task and track time");
-  // tray.setTitle("Timesheet");
-  // setTimeout(() => {
-  //   tray.setTitle("80%");
-  // }, 1000);
-  // setTimeout(() => {
-  //   tray.setTitle("90%");
-  // }, 2000);
 
-  ipcMain.on(CHANNEL_CHANGE_TRAY_ICON, () => {
-    iconIndex = (iconIndex + 1) % iconList.length;
-    tray.setImage(iconList[iconIndex]);
+  taskerStore.subscribe((state, prevState) => {
+    if (!shallow(state.task.items, prevState.task.items)) {
+      const entries = Object.entries(state.task.items);
+      const statefulTasks = entries.reduce((accum, [, task]) => {
+        if (task.type === "timer") {
+          return accum + 1;
+        }
+        return accum;
+      }, 0);
+      const finishedCount = entries.reduce((accum, [, task]) => {
+        if (task.state === "finished") {
+          return accum + 1;
+        }
+        return accum;
+      }, 0);
+      const progress = Math.floor((100 * finishedCount) / statefulTasks);
+      tray.setTitle(`${progress}%`);
+    }
   });
 
   tray.addListener("click", () => {
