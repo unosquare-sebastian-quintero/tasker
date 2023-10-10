@@ -11,9 +11,6 @@ function isDev() {
 }
 
 function createRichContextualMenuWindow(trayBounds: Electron.Rectangle) {
-  // const width = 360;
-  // const height = 240;
-
   const width = 480;
   const height = 320;
 
@@ -101,6 +98,12 @@ app.whenReady().then(function ready() {
         }
         return accum;
       }, 0);
+
+      if (statefulTasks === 0) {
+        tray.setTitle("");
+        return;
+      }
+
       const finishedCount = entries.reduce((accum, [, task]) => {
         if (task.state === "finished") {
           return accum + 1;

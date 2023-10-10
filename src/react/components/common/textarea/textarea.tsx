@@ -33,6 +33,7 @@ export function Textarea({
       {...props}
       ref={textareaRef}
       rows={rows}
+      readOnly={readOnly}
       className={clsx(className, styles.textarea, {
         [styles["textarea--read-only"]]: readOnly,
       })}
