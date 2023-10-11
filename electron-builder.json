@@ -1,0 +1,13 @@
+{
+  "appId": "unosquare.tasker",
+  "asar": true,
+  "directories": {
+    "output": "release/${version}"
+  },
+  "files": ["dist-electron", "dist"],
+  "mac": {
+    "extendInfo": {
+      "LSUIElement": true
+    }
+  }
+}

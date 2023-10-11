@@ -3,17 +3,11 @@
   "private": true,
   "version": "0.0.0",
   "main": "dist-electron/main.js",
-  "build": {
-    "appId": "unosquare.tasker",
-    "mac": {
-      "extendInfo": {
-        "LSUIElement": true
-      }
-    }
-  },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "prebuild": "tsc",
+    "build": "vite build",
+    "postbuild": "electron-builder",
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
@@ -26,7 +20,6 @@
   "dependencies": {
     "@tabler/icons-react": "2.34.0",
     "clsx": "2.0.0",
-    "electron": "26.2.1",
     "electron-positioner": "4.1.0",
     "immer": "^10.0.2",
     "react": "18.2.0",
@@ -55,6 +48,7 @@
     "@typescript-eslint/eslint-plugin": "6.7.4",
     "@typescript-eslint/parser": "6.7.4",
     "@vitejs/plugin-react-swc": "3.3.2",
+    "electron": "27.0.0",
     "electron-builder": "24.6.4",
     "electron-devtools-installer": "3.2.0",
     "eslint": "8.50.0",

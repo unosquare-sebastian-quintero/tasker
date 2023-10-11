@@ -8,7 +8,7 @@ test("close callback is called when backdrop is clicked", async () => {
   const onClose = vi.fn();
 
   render(
-    <Dialog title="Dialog" onClose={onClose}>
+    <Dialog open={true} title="Dialog" onClose={onClose}>
       <div>test</div>
     </Dialog>,
   );
@@ -23,7 +23,7 @@ test("close callback is called when close button is clicked", async () => {
   const onClose = vi.fn();
 
   render(
-    <Dialog title="Dialog" onClose={onClose}>
+    <Dialog open={true} title="Dialog" onClose={onClose}>
       <div>test</div>
     </Dialog>,
   );
@@ -35,7 +35,7 @@ test("close callback is called when close button is clicked", async () => {
 
 test("accessibility", async () => {
   const { baseElement } = render(
-    <Dialog title="Dialog">
+    <Dialog open={true} title="Dialog">
       <div>Hello World</div>
     </Dialog>,
   );

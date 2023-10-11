@@ -18,6 +18,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
+    open: true,
     title: "Default",
     children: "Hello World",
   },
@@ -25,6 +26,7 @@ export const Default: Story = {
 
 export const DialogMenu: Story = {
   args: {
+    open: true,
     title: "Select an option",
     children: (
       <Menu>
