@@ -30,3 +30,45 @@ export function secondsToString(seconds: number) {
 
   return secondsToHoursString(seconds);
 }
+
+export function getAvailableDayMinutes() {
+  const date = new Date();
+  const now = date.getTime();
+  const midnight = new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate(),
+    23,
+    59,
+    59,
+    999,
+  ).getTime();
+  const diff = (midnight - now) / 1000 / 60;
+  const chunks = Math.floor(diff / 30);
+  let offset = 100 * date.getHours() + (date.getMinutes() > 30 ? 100 : 30);
+  const available = [];
+  for (let i = 0; i < chunks; ++i) {
+    available.push(offset);
+    offset += 30;
+    let hours = Math.floor(offset / 100);
+    let minutes = offset % 100;
+    if (minutes > 30) {
+      hours += 1;
+      minutes -= 60;
+    }
+    offset = 100 * hours + minutes;
+  }
+  return available;
+}
+
+export function timeNumberToString(time: number) {
+  const hours = Math.floor(time / 100)
+    .toString()
+    .padStart(2, "0");
+  const minutes = (time % 100).toString().padStart(2, "0");
+  return `${hours}:${minutes}`;
+}
+
+export function timeStringToNumber(time: string) {
+  return parseInt(time.replace(":", ""));
+}

@@ -1,5 +1,9 @@
 import { type TaskType } from "../../../../../models/tasks";
 import {
+  AlarmTaskListItem,
+  type AlarmTaskListItemProps,
+} from "./alarm-task-list-item";
+import {
   StandardTaskListItem,
   type StandardTaskListItemProps,
 } from "./standard-task-list-item";
@@ -14,15 +18,18 @@ import {
 
 const COMPONENT_TYPE_MAP: Record<
   TaskType,
+  | React.ComponentType<AlarmTaskListItemProps>
   | React.ComponentType<StandardTaskListItemProps>
   | React.ComponentType<StopwatchTaskListItemProps>
   | React.ComponentType<TimerTaskListItemProps>
 > = {
+  alarm: AlarmTaskListItem,
   stopwatch: StopwatchTaskListItem,
   timer: TimerTaskListItem,
 };
 
 export type TaskListItemProps =
+  | AlarmTaskListItemProps
   | StandardTaskListItemProps
   | StopwatchTaskListItemProps
   | TimerTaskListItemProps;

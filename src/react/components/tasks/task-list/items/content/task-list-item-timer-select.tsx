@@ -1,11 +1,13 @@
 import { taskerAction, useTaskerStore } from "../../../../../state";
 import { Select } from "../../../../common/select/select";
 
-export type TaskListItemSelectProps = {
+export type TaskListItemTimerSelectProps = {
   uuid: string;
 };
 
-export function TaskListItemSelect({ uuid }: TaskListItemSelectProps) {
+export function TaskListItemTimerSelect({
+  uuid,
+}: TaskListItemTimerSelectProps) {
   const time = useTaskerStore((state) => state.task.items[uuid].time);
   const value = time.toString();
 

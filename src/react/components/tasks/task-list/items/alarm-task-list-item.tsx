@@ -1,8 +1,8 @@
-import { IconBellFilled } from "@tabler/icons-react";
+import { IconAlarmFilled } from "@tabler/icons-react";
 import { Menu } from "../../../common/menu/menu";
 import { TaskListItemPlayPauseButton } from "./buttons/task-list-item-play-pause-button";
 import { TaskListItemTriggerButton } from "./buttons/task-list-item-trigger-button";
-import { TaskListItemTimerSelect } from "./content/task-list-item-timer-select";
+import { TaskListItemAlarmSelect } from "./content/task-list-item-alarm-select";
 import { TaskListItemCommandMenuItem } from "./menu-items/task-list-item-command-menu-item";
 import { TaskListItemMailMenuItem } from "./menu-items/task-list-item-mail-menu-item";
 import { TaskListItemReminderMenuItem } from "./menu-items/task-list-item-reminder-menu-item";
@@ -11,14 +11,14 @@ import {
   type StandardTaskListItemProps,
 } from "./standard-task-list-item";
 
-export type TimerTaskListItemProps = StandardTaskListItemProps;
+export type AlarmTaskListItemProps = StandardTaskListItemProps;
 
-export function TimerTaskListItem(props: TimerTaskListItemProps) {
+export function AlarmTaskListItem(props: AlarmTaskListItemProps) {
   return (
     <StandardTaskListItem
       {...props}
-      icon={<IconBellFilled />}
-      editInputs={<TaskListItemTimerSelect uuid={props.uuid} />}
+      icon={<IconAlarmFilled />}
+      editInputs={<TaskListItemAlarmSelect uuid={props.uuid} />}
       editActions={
         <TaskListItemTriggerButton
           uuid={props.uuid}

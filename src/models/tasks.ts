@@ -1,4 +1,4 @@
-export type TaskType = "stopwatch" | "timer";
+export type TaskType = "stopwatch" | "timer" | "alarm";
 
 export type TaskAction =
   | { type: "notification"; payload: { message?: string } }
