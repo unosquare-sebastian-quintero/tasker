@@ -84,7 +84,8 @@ export function registerTaskHandlers() {
           taskerStore.setState((state) =>
             produce(state, (draft) => {
               const { uuid, ...task } = mutation.payload;
-              draft.task.items[uuid] = task;
+              const order = Object.keys(draft.task.items).length;
+              draft.task.items[uuid] = { order, ...task };
             }),
           );
           return taskerStore.getState().task.items[mutation.payload.uuid];
@@ -106,6 +107,17 @@ export function registerTaskHandlers() {
             }),
           );
           return mutation.payload.uuid;
+
+        case "switch":
+          taskerStore.setState((state) =>
+            produce(state, (draft) => {
+              const tmp = draft.task.items[mutation.payload.uuid1].order;
+              draft.task.items[mutation.payload.uuid1].order =
+                draft.task.items[mutation.payload.uuid2].order;
+              draft.task.items[mutation.payload.uuid2].order = tmp;
+            }),
+          );
+          break;
 
         default:
           break;

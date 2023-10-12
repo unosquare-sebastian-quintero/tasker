@@ -14,6 +14,10 @@ export type TaskAction =
       };
     };
 
+export type TaskItemOrder = {
+  order: number;
+};
+
 export type TaskItem = {
   type: TaskType;
   label: string;
@@ -22,4 +26,4 @@ export type TaskItem = {
   actions: TaskAction[];
 };
 
-export type TaskList = Record<string, TaskItem>;
+export type TaskList = Record<string, TaskItemOrder & TaskItem>;

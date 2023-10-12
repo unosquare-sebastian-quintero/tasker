@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
 
+const ENABLED = false;
+
 function getComponentName<TProps = unknown>(
   component: React.FunctionComponent<TProps>,
 ) {
@@ -18,14 +20,18 @@ export function useLifecycleLog<TProps = unknown>(
   logRef.current = logfn;
 
   useEffect(() => {
-    logRef.current(`[mounted] ${nameRef.current}`);
+    if (ENABLED) {
+      logRef.current(`[mounted] ${nameRef.current}`);
 
-    return () => {
-      logRef.current(`[unmounted] ${nameRef.current}`);
-    };
+      return () => {
+        logRef.current(`[unmounted] ${nameRef.current}`);
+      };
+    }
   }, []);
 
   useEffect(() => {
-    logRef.current(`[update] ${nameRef.current} `, props);
+    if (ENABLED) {
+      logRef.current(`[update] ${nameRef.current} `, props);
+    }
   });
 }

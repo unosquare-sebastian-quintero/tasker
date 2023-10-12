@@ -8,11 +8,11 @@
 
 ## Features
 
-* Alarm
-* Drag and drop to ordering the tasks
 * Store the tasks in the disk
 * Auto-update
 
+* ~~Drag and drop to ordering the tasks~~
+* ~~Alarm~~
 * ~~Spike: Research about the tray icon for the progress of the tasks~~
 * ~~Spike: Research about state management in electron (zustand, rxjs?)~~
 * ~~Timer~~

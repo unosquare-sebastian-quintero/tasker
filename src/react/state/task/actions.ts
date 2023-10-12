@@ -22,6 +22,10 @@ export async function removeTask(uuid: string) {
   return window.tasker.task.deleteOne(uuid);
 }
 
+export async function switchTask(uuid1: string, uuid2: string) {
+  return window.tasker.task.switch(uuid1, uuid2);
+}
+
 export async function startTask(uuid: string) {
   return window.tasker.task.start(uuid);
 }

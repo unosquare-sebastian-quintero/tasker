@@ -4,9 +4,10 @@ import {
   type Icon,
   type TablerIconsProps,
 } from "@tabler/icons-react";
-import { useState } from "react";
+import clsx from "clsx";
+import { useRef, useState } from "react";
 import { type TaskItem } from "../../../../../models/tasks";
-import { useTaskerStore } from "../../../../state";
+import { taskerAction, useTaskerStore } from "../../../../state";
 import { ToggleButton } from "../../../common/toggle-button/toggle-button";
 import { TaskListItemDeleteButton } from "./buttons/task-list-item-delete-button";
 import { TaskListItemTextarea } from "./content/task-list-item-textarea";
@@ -33,6 +34,8 @@ export function StandardTaskListItem({
   const state = useTaskerStore((state) => state.task.items[uuid].state);
 
   const [isLockedByUser, setIsLockedByUser] = useState(false);
+  const [isDraggedOver, setIsDraggedOver] = useState(false);
+  const dragCounterRef = useRef(0);
 
   const hasFinished = state === "finished";
   const isLocked = isLockedByUser || hasFinished;
@@ -41,8 +44,51 @@ export function StandardTaskListItem({
     setIsLockedByUser(pressed);
   }
 
+  function handleItemDragStart(event: React.DragEvent<HTMLLIElement>) {
+    event.dataTransfer.setData("text/plain", uuid);
+    event.dataTransfer.effectAllowed = "move";
+    dragCounterRef.current = 0;
+  }
+
+  function handleItemDragOver(event: React.DragEvent<HTMLLIElement>) {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = "move";
+  }
+
+  function handleItemDragEnter(event: React.DragEvent<HTMLLIElement>) {
+    event.preventDefault();
+    dragCounterRef.current++;
+    setIsDraggedOver(true);
+  }
+
+  function handleItemDragLeave(event: React.DragEvent<HTMLLIElement>) {
+    event.preventDefault();
+    dragCounterRef.current--;
+    if (dragCounterRef.current <= 0) {
+      setIsDraggedOver(false);
+    }
+  }
+
+  function handleItemDrop(event: React.DragEvent<HTMLLIElement>) {
+    event.preventDefault();
+    const otherUUID = event.dataTransfer.getData("text/plain");
+    taskerAction.task.switchTask(uuid, otherUUID);
+    dragCounterRef.current = 0;
+    setIsDraggedOver(false);
+  }
+
   return (
-    <li className={styles["task-list-item"]}>
+    <li
+      className={clsx(styles["task-list-item"], {
+        [styles["task-list-item--drag-over"]]: isDraggedOver,
+      })}
+      draggable
+      onDragStart={handleItemDragStart}
+      onDragOver={handleItemDragOver}
+      onDragEnter={handleItemDragEnter}
+      onDragLeave={handleItemDragLeave}
+      onDrop={handleItemDrop}
+    >
       <div className={styles["task-list-item__container"]}>{icon}</div>
 
       <TaskListItemTextarea uuid={uuid} isLocked={isLocked} />

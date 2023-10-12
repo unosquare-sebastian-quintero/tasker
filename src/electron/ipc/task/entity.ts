@@ -16,6 +16,8 @@ export interface TaskEntity {
 
   deleteOne(uuid: string): Promise<TaskItem>;
 
+  switch(uuid1: string, uuid2: string): void;
+
   start(uuid: string): void;
 
   stop(uuid: string): void;
@@ -45,6 +47,13 @@ export function createTaskEntity() {
       return ipcRenderer.invoke(CHANNEL_MUTATE_TASK, {
         command: "delete",
         payload: { uuid },
+      } satisfies TaskMutation);
+    },
+
+    switch(uuid1, uuid2) {
+      return ipcRenderer.invoke(CHANNEL_MUTATE_TASK, {
+        command: "switch",
+        payload: { uuid1, uuid2 },
       } satisfies TaskMutation);
     },
 
