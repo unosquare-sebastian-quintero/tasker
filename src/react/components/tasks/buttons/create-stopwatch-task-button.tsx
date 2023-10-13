@@ -15,7 +15,7 @@ export function CreateStopwatchTaskButton() {
 
   return (
     <Button
-      variant="secondary"
+      variant="primary"
       onClick={handleButtonClick}
       leftIcon={IconClock}
     >

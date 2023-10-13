@@ -14,7 +14,7 @@ export function CreateTimerTaskButton() {
   }
 
   return (
-    <Button variant="secondary" onClick={handleButtonClick} leftIcon={IconBell}>
+    <Button variant="primary" onClick={handleButtonClick} leftIcon={IconBell}>
       Timer
     </Button>
   );

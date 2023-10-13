@@ -15,7 +15,7 @@ export function CreateAlarmTaskButton() {
 
   return (
     <Button
-      variant="secondary"
+      variant="primary"
       onClick={handleButtonClick}
       leftIcon={IconAlarm}
     >

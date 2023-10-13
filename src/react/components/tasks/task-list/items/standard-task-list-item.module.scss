@@ -1,11 +1,13 @@
 @import "../../../../styles/theme";
 
 .task-list-item {
+  box-sizing: border-box;
   padding: 0.5rem 1rem;
   display: flex;
   align-items: stretch;
   gap: 0.25rem;
   background-color: $secondary;
+  border: 1px solid transparent;
   & ~ & {
     border-top: $border-secondary;
   }
@@ -16,9 +18,10 @@
     display: flex;
     align-items: center;
     gap: 0.25rem;
-    box-sizing: border-box;
   }
-  &--drag-over {
+  &.task-list-item--drag-over {
+    $drop-border: 1px dashed $primary-shade-2;
     background-color: $secondary-shade-2;
+    border: $drop-border;
   }
 }
