@@ -89,7 +89,14 @@ export function StandardTaskListItem({
       onDragLeave={handleItemDragLeave}
       onDrop={handleItemDrop}
     >
-      <div className={styles["task-list-item__container"]}>{icon}</div>
+      <div
+        className={clsx(
+          styles["task-list-item__container"],
+          styles["task-list-item__icon"],
+        )}
+      >
+        {icon}
+      </div>
 
       <TaskListItemTextarea uuid={uuid} isLocked={isLocked} />
       {!isLocked ? editInputs : null}

@@ -6,7 +6,6 @@
   display: flex;
   align-items: stretch;
   gap: 0.25rem;
-  background-color: $secondary;
   border: 1px solid transparent;
   & ~ & {
     border-top: $border-secondary;
@@ -18,6 +17,9 @@
     display: flex;
     align-items: center;
     gap: 0.25rem;
+  }
+  &__icon {
+    color: $primary;
   }
   &.task-list-item--drag-over {
     $drop-border: 1px dashed $primary-shade-2;
