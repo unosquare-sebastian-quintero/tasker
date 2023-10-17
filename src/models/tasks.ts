@@ -18,6 +18,10 @@ export type TaskItemOrder = {
   order: number;
 };
 
+export type TaskItemInitial = {
+  initialTime: number;
+};
+
 export type TaskItem = {
   type: TaskType;
   label: string;
@@ -26,4 +30,7 @@ export type TaskItem = {
   actions: TaskAction[];
 };
 
-export type TaskList = Record<string, TaskItemOrder & TaskItem>;
+export type TaskList = Record<
+  string,
+  TaskItemOrder & TaskItemInitial & TaskItem
+>;

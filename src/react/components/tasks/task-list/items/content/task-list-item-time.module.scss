@@ -1,4 +1,27 @@
+@import "../../../../../styles/theme";
+
 .task-list-item-time {
   width: 4.5rem;
   text-align: left;
+  &__label {
+    display: flex;
+    flex-direction: column;
+  }
+  &__progress {
+    -webkit-appearance: none;
+    appearance: none;
+    max-width: 90%;
+    display: block;
+    block-size: 0.25rem;
+    margin: 0 auto;
+    // height: 4px;
+    // border: none;
+    // background-color: $primary;
+    &::-webkit-progress-bar {
+      background-color: $secondary;
+    }
+    &::-webkit-progress-value {
+      background-color: $primary;
+    }
+  }
 }

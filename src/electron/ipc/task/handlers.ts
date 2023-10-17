@@ -85,7 +85,8 @@ export function registerTaskHandlers() {
             produce(state, (draft) => {
               const { uuid, ...task } = mutation.payload;
               const order = Object.keys(draft.task.items).length;
-              draft.task.items[uuid] = { order, ...task };
+              const initialTime = task.time;
+              draft.task.items[uuid] = { order, initialTime, ...task };
             }),
           );
           return taskerStore.getState().task.items[mutation.payload.uuid];
@@ -94,7 +95,15 @@ export function registerTaskHandlers() {
           taskerStore.setState((state) =>
             produce(state, (draft) => {
               const { uuid, ...task } = mutation.payload;
-              draft.task.items[uuid] = { ...draft.task.items[uuid], ...task };
+              const initialTime =
+                task.time != null
+                  ? task.time
+                  : draft.task.items[uuid].initialTime;
+              draft.task.items[uuid] = {
+                ...draft.task.items[uuid],
+                ...task,
+                initialTime,
+              };
             }),
           );
           return taskerStore.getState().task.items[mutation.payload.uuid];

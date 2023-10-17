@@ -6,7 +6,10 @@ import {
 } from "@tabler/icons-react";
 import clsx from "clsx";
 import { useRef, useState } from "react";
-import { type TaskItem } from "../../../../../models/tasks";
+import {
+  type TaskItem,
+  type TaskItemInitial,
+} from "../../../../../models/tasks";
 import { taskerAction, useTaskerStore } from "../../../../state";
 import { ToggleButton } from "../../../common/toggle-button/toggle-button";
 import { TaskListItemDeleteButton } from "./buttons/task-list-item-delete-button";
@@ -16,7 +19,7 @@ import styles from "./standard-task-list-item.module.scss";
 
 export type StandardTaskListItemProps = React.PropsWithChildren & {
   uuid: string;
-  task: TaskItem;
+  task: TaskItem & TaskItemInitial;
   icon?: React.ReactElement<TablerIconsProps, Icon>;
   editInputs?: React.ReactNode;
   readOnlyActions?: React.ReactNode;
@@ -99,7 +102,9 @@ export function StandardTaskListItem({
       </div>
 
       <TaskListItemTextarea uuid={uuid} isLocked={isLocked} />
-      {!isLocked ? editInputs : null}
+      <div className={styles["task-list-item__container"]}>
+        {!isLocked ? editInputs : null}
+      </div>
 
       <div className={styles["task-list-item__container"]}>
         {isLocked ? (
@@ -118,15 +123,17 @@ export function StandardTaskListItem({
         <TaskListItemTime task={task} />
       </div>
 
-      <ToggleButton
-        aria-label={`${isLocked ? "Unlock" : "Lock"} "${task.label}"`}
-        aria-disabled={hasFinished}
-        disabled={hasFinished}
-        pressed={hasFinished ? true : undefined}
-        onToggle={handleLockToggleButton}
-      >
-        {isLocked ? <IconLock /> : <IconLockOpen />}
-      </ToggleButton>
+      <div className={styles["task-list-item__container"]}>
+        <ToggleButton
+          aria-label={`${isLocked ? "Unlock" : "Lock"} "${task.label}"`}
+          aria-disabled={hasFinished}
+          disabled={hasFinished}
+          pressed={hasFinished ? true : undefined}
+          onToggle={handleLockToggleButton}
+        >
+          {isLocked ? <IconLock /> : <IconLockOpen />}
+        </ToggleButton>
+      </div>
     </li>
   );
 }
